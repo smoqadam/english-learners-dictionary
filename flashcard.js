@@ -1,74 +1,74 @@
-var translator = document.createElement('div');
-translator.style.display = "none";
-translator.style.position = "fixed";
-translator.style.top = "0px";
-translator.style.left = "0px";
-translator.style.zIndex = "9999";
-translator.style.background = "#ccc";
-translator.style.padding = "5px";
-translator.style.border = "1px solid #ddd";
-translator.style.margin = "5px";
-translator.style.maxWidth = "500px";
-document.body.appendChild(translator);
+let translateButton = '<div class="tr-wrapper" style="position: absolute">' +
+    '<a href="#" class="tr-button">TR</a> ' +
+    '</div>';
+let style = '<style>' +
+    '.tr-body{} .tr-body ul{list-style: circle}' +
+    '</style>' ;
+let translationBody =
+    '<div class="tr-body" style="display:none; background: #ccc; color:#fff; position: fixed; top:1px; left: 1px; width: 450px; height: 200px; overflow: scroll">' +
+    '<h4 class="tr-word"></h4>' +
+    '<span class="tr-pos"></span>' +
+    '<span class="tr-pron"></span> ' +
+    '<ul class="tr-defs"></ul>' +
+    '</div>';
 
-var menu = document.createElement("ul");
-menu.style.background = "#ccc";
-menu.style.listStyleType  = "none";
-menu.style.textAlign = "center";
-menu.style.position = "absolute";
-menu.style.zIndex = "9999";
-// menu.style.borderRadius = "50%";
-// menu.style.width = "20px";
-// menu.style.height = "20px";
-var selection;
+$(translateButton).appendTo('body');
+$(translationBody).appendTo('body');
+$(style).appendTo('head');
+let selection;
 
-var menudItemTranslate = document.createElement('li');
-menu.appendChild(menudItemTranslate);
-var menudItemTranslateA = document.createElement('a');
-menudItemTranslateA.style.padding = "5px";
-menudItemTranslateA.style.display = "inline";
-menudItemTranslateA.style.cursor = "pointer";
-menudItemTranslateA.textContent = "Tr";
-menudItemTranslateA.href = "#";
-menudItemTranslateA.addEventListener('click', function(e){
+$('.tr-button').on('click', function(e){
   e.preventDefault();
-  console.log("selection");
-  console.log(selection);
-  if (selection !== ''){
-        translator.textContent = selection;
-        translator.style.display = "block";
-        menu.style.display = "none";
+    if (selection !== ''){
+      let url = "http://127.0.0.1:8000/"+selection;
+        const myRequest = new Request(url);
+        fetch(myRequest)
+            .then(response => {
+                if (response.status === 200) {
+                    return response.json();
+                } else {
+                    throw new Error('Something went wrong on api server!');
+                }
+            })
+            .then(response => {
+                $('body').find('.tr-body .tr-pos').html(response['parts_of_speech']);
+                $('body').find('.tr-body .tr-pron').html(response['pronunciation']);
+                $('body').find('.tr-body .tr-word').html(response['word']);
+                let def;
+                for([index, definition] of Object.entries(response.definitions)){
+                    def = $('<li class="tr-def">'+definition.definition+'<ul></ul></li>');
+                    for ([key, example] of Object.entries(definition.examples)){
+                        console.log(example);
+                        $(def).find('ul').append('<li class="examples">'+example.example+'</li>')
+                    }
+                    $('body').find('.tr-body ul.tr-defs').append(def);
+                }
+
+                $('body').find('.tr-body').css('display', 'block');
+                setTimeout(function(){
+                    $('body').find('.tr-body').css('display', 'none');
+                }, 10000)
+            })
+            .catch(error => {
+                console.error(error);
+            });
   }
 });
-menudItemTranslate.appendChild(menudItemTranslateA);
-
-//TODO: add functionality
-// var menudItemAdd = document.createElement('li');
-// menudItemAdd.style.display = "inline";
-// menudItemAdd.style.background = "#ccc";
-// menudItemAdd.style.padding = "5px";
-// menudItemAdd.textContent = "Add";
-// menudItemAdd.addEventListener('click', function(e){
-//   //do something
-// });
-// menu.appendChild(menudItemAdd);
-
-document.body.appendChild(menu);
-
 
 document.onmouseup =  function (evt) {
-  var s = document.getSelection(),
+  let s = document.getSelection(),
   bodyRect = document.body.getBoundingClientRect(),
   r = s.getRangeAt(0);
   if (r && s.toString()) {
-    var p = r.getBoundingClientRect();
+    let p = r.getBoundingClientRect();
     if (p.left || p.top) {
-      menu.style.left = (p.left) +"px";
-      menu.style.top = ((p.top - bodyRect.top) - menu.offsetHeight - 10) +"px";
-      menu.style.display = "block";
-      selection = s.toString();
-      console.log(selection);
-      return;
+        selection = s.toString();
+        console.log(selection);
+        $(document).find('.tr-wrapper').css({
+            top: ((p.top - bodyRect.top) - 10) + "px",
+            left: p.left + "px",
+            display: "block",
+        });
     }
   }
 };
