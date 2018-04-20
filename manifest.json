@@ -8,14 +8,14 @@
     {
       "matches":["<all_urls>"],
       "js":[
-        "jquery.min.js",
-        "flashcard.js"
+        "data/jquery.min.js",
+        "data/flashcard.js"
+      ],
+      "css":[
+        "data/styles.css"
       ]
     }
   ],
-  "background":{
-    "scripts":["background.js"]
-  },
   "permissions": [
     "<all_urls>",
     "webRequest"

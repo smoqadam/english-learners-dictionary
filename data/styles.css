@@ -1,0 +1,103 @@
+.tr-loading {
+    display: none;
+    z-index: 99999999;
+    background: #2092cc;
+    padding: 10px;
+    color: #fff;
+    position: fixed;
+    top: 5px;
+    left: 5px;
+}
+
+.tr-body {
+    display: none;
+    z-index: 99999999;
+    background: #2092cc;
+    padding: 10px;
+    color: #fff;
+    position: fixed;
+    top: 5px;
+    left: 5px;
+    width: 450px;
+    height: 250px;
+    overflow-y: scroll;
+}
+.tr-def-wrapper{
+    overflow: hidden;
+}
+.tr-body ul {
+    list-style: disc
+}
+.tr-word{
+    font-size: 15px;
+    font-weight: bold;
+}
+.tr-pos{
+
+}
+.tr-pron{
+
+}
+
+.tr-defs{
+
+}
+.tr-button {
+    width: 24px;
+    height: 24px;
+    background: url("icons8-dictionary-50.png") no-repeat;
+    background-size: 24px 24px;
+    cursor: pointer;
+
+}
+
+.tr-pos {
+    font-weight: bold;
+    clear: both;
+}
+
+.tr-wrapper{
+    position: absolute;
+
+}
+.tr-close {
+    position: absolute;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    overflow: hidden;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+}
+.tr-close:hover::before, .tr-close:hover::after {
+    background: #1ebcc5;
+}
+.tr-close::before, .tr-close::after {
+    content: '';
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    margin-top: -1px;
+    background: #000;
+}
+.tr-close::before {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.tr-close::after {
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+.tr-close.fat::before, .tr-close.fat::after {
+    border-radius: 100%;
+}
