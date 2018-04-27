@@ -1,40 +1,70 @@
 .tr-loading {
+    background: url("images/loading.gif") 10px 10px no-repeat #2092cc;
     display: none;
     z-index: 99999999;
-    background: #2092cc;
-    padding: 10px;
+    padding: 10px 15px 10px 38px;
     color: #fff;
     position: fixed;
     top: 5px;
     left: 5px;
+    font: tahoma 12px;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(0,0,0,.09)
 }
 
 .tr-body {
     display: none;
     z-index: 99999999;
-    background: #2092cc;
+    background: #eee;
     padding: 10px;
-    color: #fff;
     position: fixed;
     top: 5px;
     left: 5px;
     width: 450px;
     height: 250px;
     overflow-y: scroll;
+    padding: 10px;
+    margin: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,.09);
+    border: 1px solid #d7d5d5
 }
+
+.tr-body ul {
+    padding-left: 10px;
+}
+
+.tr-body ul li {
+    padding: 5px;
+}
+
+.tr-body ul li.tr-def {
+    border-bottom: 1px solid #dad1d1;
+}
+
+.tr-body ul li.examples {
+    background: url("images/right-arrow.png") 0 10px no-repeat;
+    list-style-type: none;
+    padding-left: 17px;
+}
+
 .tr-def-wrapper{
     overflow: hidden;
 }
+
 .tr-body ul {
     list-style: disc
 }
+
 .tr-word{
-    font-size: 15px;
+    font-size: 30px;
     font-weight: bold;
+    margin: 13px 0 -8px 0;
 }
+
 .tr-pos{
 
 }
+
 .tr-pron{
 
 }
@@ -42,13 +72,14 @@
 .tr-defs{
 
 }
+
 .tr-button {
     width: 24px;
     height: 24px;
-    background: url("icons8-dictionary-50.png") no-repeat;
+    background: url("images/language.svg") no-repeat;
     background-size: 24px 24px;
     cursor: pointer;
-
+    z-index: 99999;
 }
 
 .tr-pos {
@@ -66,13 +97,15 @@
     width: 20px;
     height: 20px;
     overflow: hidden;
-    right: 0;
-    top: 0;
+    right: 15px;
+    top: 34px;
     cursor: pointer;
 }
+
 .tr-close:hover::before, .tr-close:hover::after {
     background: #1ebcc5;
 }
+
 .tr-close::before, .tr-close::after {
     content: '';
     position: absolute;
