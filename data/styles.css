@@ -47,7 +47,7 @@
     padding-left: 17px;
 }
 
-.tr-def-wrapper{
+.tr-window{
     overflow: hidden;
 }
 
@@ -133,4 +133,9 @@
 
 .tr-close.fat::before, .tr-close.fat::after {
     border-radius: 100%;
+}
+
+.tr-body li.tr-did-you-mean:hover{
+    cursor: pointer;
+    text-decoration: underline;
 }
