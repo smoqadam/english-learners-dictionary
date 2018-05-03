@@ -39,7 +39,7 @@ $('.tr-button').on('click', function(e){
 function fetchDefinitions(){
     $('.tr-wrapper').css('display', 'none');
     if (selection !== ''){
-        let url = "http://localhost:8000/"+selection;
+        let url = "http://dict.smoqadam.me/"+selection;
         const myRequest = new Request(url);
         $('body').find('.tr-body').css('display', 'none');
         $('body').find('.tr-loading').css('display','block');
