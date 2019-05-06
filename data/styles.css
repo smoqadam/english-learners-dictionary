@@ -38,6 +38,7 @@
 }
 .tr-body ul {
     padding-left: 10px;
+    max-height: 185px;
 }
 
 .tr-body ul li {
@@ -99,13 +100,14 @@
     z-index: 2000000000 !important;
     position: absolute;
 }
-span.syn {
+a.syn {
     padding: 2px;
     background: #eee;
     border: 1px solid #ccc;
     margin: 6px;
     display: inline-block;
     margin: 3px 0;
+    cursor: pointer;
 }
 .tr-pos {
     font-weight: bold;

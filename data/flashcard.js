@@ -21,13 +21,13 @@ let selection;
 $('.tr-body').click(function (e) {
     e.stopPropagation();
 });
-// $(document).click(function (e) {
-//     $('body').find('.tr-body').css('display', 'none');
-// });
+$(document).click(function (e) {
+    $('body').find('.tr-body').css('display', 'none');
+});
 
-// $('.tr-close').click(function(){
-//     $('body').find('.tr-body').css('display', 'none');
-// });
+$('.tr-close').click(function(){
+    $('body').find('.tr-body').css('display', 'none');
+});
 
 $('.tr-button').on('click', function(e){
     e.preventDefault();
@@ -65,15 +65,13 @@ function fetchDefinitions(){
                             def = $('<li class="tr-def">'+m.definition+'</li>');
                             var example = '';
                             if (m.example) {
-                                example = '<span class="examples"><strong>Example:</strong> '+m.example+'</span></div>';
+                                example = '<span class="examples"><strong>Example:</strong> '+m.example+'</span>';
                             }
                             var synonyms = '';
-                            if (m.synonyms && m.synonyms.length) {
+                            if (m.synonyms && m.synonyms.length > 0) {
                                 var syns = m.synonyms.map(function(item){
-                                    console.log(item); 
-                                    return '<span class="syn">'+item+'</span>';
+                                    return '<a href="#" class="syn">'+item+'</a>';
                                 });
-                                console.log(syns); 
                                 synonyms = '<span class="synonyms"><strong>Synonyms:</strong> '+syns.join(' ')+'</span>';
                             }
                             $(def).append('<div class="extra">'+example+synonyms+'</div>');
@@ -85,9 +83,9 @@ function fetchDefinitions(){
 
                 $('body').find('.tr-loading').css('display','none');
                 $('body').find('.tr-body').css('display', 'block');
-                // setTimeout(function(){
-                //     $('body').find('.tr-body').css('display', 'none');
-                // }, 50000)
+                setTimeout(function(){
+                    $('body').find('.tr-body').css('display', 'none');
+                }, 50000)
             })
             .catch(error => {
                 $('body').find('.tr-loading').css('display','none');
@@ -96,6 +94,10 @@ function fetchDefinitions(){
     }
 }
 
+$('.tr-body').on('click', 'a.syn', function (e) {
+    selection = $(this).text();
+    fetchDefinitions();
+});
 
 document.onmouseup =  function (evt) {
     let s = document.getSelection(),
@@ -106,7 +108,7 @@ document.onmouseup =  function (evt) {
         if (p.left || p.top) {
             selection = s.toString();
             $(document).find('.tr-wrapper').css({
-                top: ((p.top - bodyRect.top)) + "px",
+                top: ((p.top - bodyRect.top) - 20 ) + "px",
                 left: p.left + "px",
                 display: "block",
             });
