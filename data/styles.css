@@ -15,20 +15,27 @@
 .tr-body {
     display: none;
     z-index: 99999999;
-    background: #eee;
-    padding: 10px;
+    background: #fff;
     position: fixed;
     top: 5px;
     left: 5px;
     width: 450px;
     height: 250px;
     overflow-y: scroll;
-    padding: 10px;
     margin: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,.09);
-    border: 1px solid #d7d5d5
+    overflow: hidden;
+    -webkit-box-shadow: 10px 9px 27px -17px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 9px 27px -17px rgba(0,0,0,0.75);
+    box-shadow: 10px 9px 27px -17px rgba(0,0,0,0.75);
 }
 
+.tr-def-wrapper{
+    position: relative;
+    height: 100%;
+    width: 100%;
+    overflow: hidden; 
+}
 .tr-body ul {
     padding-left: 10px;
 }
@@ -54,11 +61,16 @@
 .tr-body ul {
     list-style: disc
 }
+.tr-header {
 
+    padding: 8px;
+    background: #0897ff;
+}
 .tr-word{
-    font-size: 30px;
+    font-size: 22px;
     font-weight: bold;
-    margin: 13px 0 -8px 0;
+    color: white;
+    width: 50%
 }
 
 .tr-pos{
@@ -66,22 +78,35 @@
 }
 
 .tr-pron{
-
+    margin-left: 10px;
+    font-size: 14px;
+    color: rgb(226, 226, 226);
 }
 
 .tr-defs{
-
+    height: 100%;
+    overflow-y: scroll;
 }
-
+.tr-defs .extra span {
+    display: block;
+}
 .tr-button {
     width: 24px;
     height: 24px;
     background: url("images/language.svg") no-repeat;
     background-size: 24px 24px;
     cursor: pointer;
-    z-index: 99999;
+    z-index: 2000000000 !important;
+    position: absolute;
 }
-
+span.syn {
+    padding: 2px;
+    background: #eee;
+    border: 1px solid #ccc;
+    margin: 6px;
+    display: inline-block;
+    margin: 3px 0;
+}
 .tr-pos {
     font-weight: bold;
     clear: both;
@@ -94,16 +119,16 @@
 .tr-close {
     position: absolute;
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     overflow: hidden;
     right: 15px;
-    top: 34px;
+    top: 15px;
     cursor: pointer;
 }
 
 .tr-close:hover::before, .tr-close:hover::after {
-    background: #1ebcc5;
+    /* background: #1ebcc5; */
 }
 
 .tr-close::before, .tr-close::after {
@@ -114,7 +139,7 @@
     top: 50%;
     left: 0;
     margin-top: -1px;
-    background: #000;
+    background: rgb(255, 255, 255);
 }
 .tr-close::before {
     -webkit-transform: rotate(45deg);
