@@ -25,9 +25,7 @@
     margin: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,.09);
     overflow: hidden;
-    -webkit-box-shadow: 10px 9px 27px -17px rgba(0,0,0,0.75);
-    -moz-box-shadow: 10px 9px 27px -17px rgba(0,0,0,0.75);
-    box-shadow: 10px 9px 27px -17px rgba(0,0,0,0.75);
+    font-family: Arial !important;
 }
 
 .tr-def-wrapper{
@@ -35,18 +33,22 @@
     height: 100%;
     width: 100%;
     overflow: hidden; 
+    color: #626262 !important;
+    font-size: 14px !important;
 }
 .tr-body ul {
-    padding-left: 10px;
-    max-height: 185px;
+    list-style: none;
+    max-height: 210px;
+    margin: 0 auto;
+    padding-left: 0;
+    max-height: 210px;
 }
 
-.tr-body ul li {
-    padding: 5px;
-}
 
 .tr-body ul li.tr-def {
     border-bottom: 1px solid #dad1d1;
+    padding: 10px 0;
+    padding-left: 10px;
 }
 
 .tr-body ul li.examples {
@@ -59,11 +61,7 @@
     overflow: hidden;
 }
 
-.tr-body ul {
-    list-style: disc
-}
 .tr-header {
-
     padding: 8px;
     background: #0897ff;
 }
@@ -71,26 +69,50 @@
     font-size: 22px;
     font-weight: bold;
     color: white;
-    width: 50%
+    width: 50%;
+    text-transform: capitalize;
 }
 
-.tr-pos{
+.tr-header .speaker{
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background: transparent url("./speaker.svg") center center no-repeat;
+        background-size: auto;
+    -webkit-background-size: 24px 24px;
+    background-size: 24px 24px;
+    border: none;
+    position: relative;
+    top: 8px;
+    cursor: pointer;
 
 }
 
 .tr-pron{
     margin-left: 10px;
     font-size: 14px;
-    color: rgb(226, 226, 226);
+    color: rgb(201, 234, 255);
+    font-family: Arial;
+    font-weight: 550;
 }
 
 .tr-defs{
     height: 100%;
     overflow-y: scroll;
+    margin: 0 auto !important;
 }
 .tr-defs .extra span {
-    display: block;
+    display: block !important;
+    margin-top: 8px !important;
+    margin-left: 21px !important;
+    text-align: left !important;
+    font-size: 12px;
 }
+
+div.tr-def{
+    font-weight: bold;
+}
+
 .tr-button {
     width: 24px;
     height: 24px;
@@ -101,13 +123,12 @@
     position: absolute;
 }
 a.syn {
-    padding: 2px;
-    background: #eee;
-    border: 1px solid #ccc;
     margin: 6px;
     display: inline-block;
     margin: 3px 0;
     cursor: pointer;
+    text-decoration: underline;
+    color: #0897ff !important;
 }
 .tr-pos {
     font-weight: bold;
