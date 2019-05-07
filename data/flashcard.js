@@ -1,7 +1,7 @@
 let translator = {
     init: function() {
         this.selection = '';
-        this.url = "http://127.0.0.1:3000/?define=";
+        this.url = "http://dict.smoqadam.me/?define=";
         let translateButton = '<div class="tr-wrapper"><div class="tr-button"></div></div>';
         let translationBody =
             '<div style="" class="tr-window">' +
