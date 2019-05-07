@@ -1,9 +1,9 @@
 {
   "manifest_version":2,
-  "name":"Flashcard",
-  "version":"1.0",
-  "description":"Flashcard for learning",
-
+  "name":"English To English dictionary",
+  "author":"Saeed Moghadamzadeh",
+  "version":"0.2",
+  "description":"Easy to use and powerfull English To English dictionary. Including phonetics, synonyms and example for learning new words deeply.",
   "content_scripts":[
     {
       "matches":["<all_urls>"],
@@ -12,12 +12,16 @@
         "data/flashcard.js"
       ],
       "css":[
-        "data/styles.css"
+        "style/styles.css"
       ]
     }
   ],
   "permissions": [
     "<all_urls>",
     "webRequest"
+  ],
+  "web_accessible_resources": [
+    "images/*",
+    "style/style.css"
   ]
 }

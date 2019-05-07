@@ -20,13 +20,23 @@ let translator = {
         $(translationBody).appendTo('body');
         $(loading).appendTo('body');
         this.wrapper = $('body').find('.tr-body .tr-def-wrapper');
+        
+        var loadingImgURL = chrome.extension.getURL("images/loading.gif");
+        document.querySelector(".tr-loading").style = "background: url('"+loadingImgURL+"') 10px center no-repeat #2092cc !important; ";
+
+        var btnImgURL = chrome.extension.getURL("images/language.png");
+        document.querySelector(".tr-button").style = "background: url('"+btnImgURL+"') 0% 0% / 24px 24px no-repeat !important; ";
+
     },
     showButton: function(top, left) {
         $(document).find('.tr-wrapper').css({
             top : top + "px",
             left: left + "px",
-            display: "block",
+            display: "table-cell",
         });
+        setTimeout(function(){
+            translator.hideButton();
+        }, 5000);
     },
     hideButton: function(){
         $('.tr-wrapper').css('display', 'none');
@@ -34,15 +44,10 @@ let translator = {
     showWindow: function() {
         $('body').find('.tr-body').css('display', 'block');
         $('body').find('.tr-body .tr-defs').scrollTop(0);
-        // setTimeout(function(){
-        //     this.hideWindow();
-        // }, 50000);
+
     },
     hideWindow: function(){
         $('body').find('.tr-body').css('display', 'none');
-    },
-    getData: function() {
-
     },
     showLoading: function() {
         $('body').find('.tr-loading').css('display','block');
@@ -136,14 +141,17 @@ $(document).on('click', '.tr-button', function(e){
 document.onmouseup =  function (evt) {
     let selection;
     let s = document.getSelection(),
-        bodyRect = document.body.getBoundingClientRect(),
+        bodyRect = document.body.getBoundingClientRect();
+    if (s.rangeCount > 0) {
         r = s.getRangeAt(0);
-    if (r && s.toString()) {
-        let p = r.getBoundingClientRect();
-        if (p.left || p.top) {
-            selection = s.toString();
-            translator.setWord(selection);
-            translator.showButton(((p.top - bodyRect.top) - 20 ), p.left);
+        if (r && s.toString()) {
+            let p = r.getBoundingClientRect();
+            console.log({p});
+            if (p.left || p.top) {
+                selection = s.toString();
+                translator.setWord(selection);
+                translator.showButton(((p.top - bodyRect.top) - 30 ), p.right);
+            }
         }
     }
 };
