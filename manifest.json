@@ -9,7 +9,7 @@
       "matches":["<all_urls>"],
       "js":[
         "data/jquery.min.js",
-        "data/flashcard.js"
+        "data/dictionary.js"
       ],
       "css":[
         "style/styles.css"
@@ -17,11 +17,21 @@
     }
   ],
   "permissions": [
-    "<all_urls>",
-    "webRequest"
+    "activeTab",
+    "contextMenus",
+    "webRequest","webRequestBlocking",
+    "*://*.smoqadam.me/"
   ],
+  "background":{
+    "scripts":[
+      "src/background.js"
+    ]
+  },
+  "icons":{
+    "16":"icons/dictionary-32.png"
+  },
   "web_accessible_resources": [
-    "images/*",
+    "icons/*",
     "style/style.css"
   ]
 }
