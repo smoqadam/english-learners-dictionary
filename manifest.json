@@ -2,7 +2,7 @@
   "manifest_version":2,
   "name":"English To English dictionary",
   "author":"Saeed Moghadamzadeh",
-  "version":"0.3",
+  "version":"0.4",
   "description":"Easy to use and powerfull English To English dictionary. Including phonetics, synonyms and example for learning new words deeply.",
   "content_scripts":[
     {
