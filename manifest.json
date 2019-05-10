@@ -20,7 +20,7 @@
     "activeTab",
     "contextMenus",
     "webRequest","webRequestBlocking",
-    "*://*.smoqadam.me/"
+    "*://*.smoqadam.me/","storage"
   ],
   "background":{
     "scripts":[
@@ -33,5 +33,10 @@
   "web_accessible_resources": [
     "icons/*",
     "style/style.css"
-  ]
+  ],
+  "options_ui":{
+    "page": "src/setting/settings.html",
+    "open_in_tab": true
+  }
+
 }

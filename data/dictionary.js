@@ -23,10 +23,15 @@ let translator = {
 
     var loadingImgURL = chrome.extension.getURL("icons/loading.gif");
     document.querySelector(".tr-loading").style =
-      "background: url('" +loadingImgURL +"') 10px center no-repeat #2092cc !important; ";
+      "background: url('" +
+      loadingImgURL +
+      "') 10px center no-repeat #2092cc !important; ";
 
     var btnImgURL = chrome.extension.getURL("icons/dictionary-32.png");
-    document.querySelector(".tr-button").style = "background: url('" + btnImgURL +"') 0% 0% / 24px 24px no-repeat !important; ";
+    document.querySelector(".tr-button").style =
+      "background: url('" +
+      btnImgURL +
+      "') 0% 0% / 24px 24px no-repeat !important; ";
   },
   showButton: function(top, left) {
     $(document)
@@ -69,18 +74,25 @@ let translator = {
   setWord: function(selection) {
     this.selection = selection;
   },
-  setData: function(data){
-      this.data = data;
+  setData: function(data) {
+    this.data = data;
   },
   fetchData: function() {
     if (this.selection !== "") {
-    this.hideButton();
-    this.hideWindow();
-    this.showLoading();
+      this.hideButton();
+      this.hideWindow();
+      this.showLoading();
       var $this = this;
-      chrome.runtime.sendMessage({ word: this.selection }, function(result) {
-        $this.showPopup(result);
-      });
+      var selection = this.selection;
+      chrome.storage.sync.get(selection, res => {
+          if (res[selection]) {
+            $this.showPopup(res[this.selection]);
+          } else {
+            chrome.runtime.sendMessage({ word: this.selection }, function(result) {
+                $this.showPopup(result);
+            });
+          }
+      })
     }
   },
   showPopup: function(response) {
@@ -90,7 +102,7 @@ let translator = {
         '<span class="tr-word">' +
         response["word"] +
         '</span><span class="tr-pron">' +
-        (response["phonetic"] || '')+
+        (response["phonetic"] || "") +
         "</span>" +
         '<span class="tr-close fat"></span>';
       this.wrapper.find(".tr-header").html(header);
@@ -128,6 +140,19 @@ let translator = {
       }
       this.hideLoading();
       this.showWindow();
+      chrome.storage.sync.get("settings", result => {
+          if (result.settings.saveWords) {
+              let word = {};
+              word[response['word']] = response;
+              chrome.storage.sync.set(word);
+          }
+
+          if (result.settings.hideWindow > 0) {
+              setTimeout(function(){
+                  translator.hideWindow();
+              }, result.settings.hideWindow);
+          }
+      });
     }
   }
 };
@@ -168,13 +193,17 @@ document.onmouseup = function(evt) {
       if (p.left || p.top) {
         selection = s.toString();
         translator.setWord(selection);
-        translator.showButton(p.top - bodyRect.top - 30, p.right);
+        chrome.storage.sync.get("settings", result => {
+          if (result.settings.showIcon) {
+            translator.showButton(p.top - bodyRect.top - 30, p.right);
+          }
+        });
       }
     }
   }
 };
 
 chrome.runtime.onMessage.addListener(function(req) {
-    translator.showLoading();
+  translator.showLoading();
   translator.fetchData();
 });
