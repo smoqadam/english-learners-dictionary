@@ -37,6 +37,10 @@
   "options_ui":{
     "page": "src/setting/settings.html",
     "open_in_tab": true
+  },
+  "applications": {
+    "gecko": {
+      "id": "saeed.moqadam@gmail.com"
+    }
   }
-
 }
