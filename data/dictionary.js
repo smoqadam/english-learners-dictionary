@@ -17,6 +17,7 @@ let translator = {
       "</div>";
     let loading = '<div class="tr-loading">Please Wait...</div>';
     $(translateButton).appendTo("body");
+    this.hideButton();
     $(translationBody).appendTo("body");
     $(loading).appendTo("body");
     this.wrapper = $("body").find(".tr-body .tr-def-wrapper");
@@ -142,17 +143,17 @@ let translator = {
       }
       this.hideLoading();
       this.showWindow();
-      chrome.storage.sync.get("settings", result => {
-        if (result.settings.saveWords) {
+      chrome.storage.sync.get("dict_settings", result => {
+        if (result.dict_settings.saveWords) {
           let word = {};
           word[response["word"]] = response;
           chrome.storage.sync.set(word);
         }
 
-        if (result.settings.hideWindow > 0) {
+        if (result.dict_settings.hideWindow > 0) {
           setTimeout(function() {
             translator.hideWindow();
-          }, result.settings.hideWindow);
+          }, result.dict_settings.hideWindow);
         }
       });
     }
@@ -197,8 +198,9 @@ document.onmouseup = function(evt) {
       if (p.left || p.top) {
         selection = s.toString();
         translator.setWord(selection);
-        chrome.storage.sync.get("settings", result => {
-          if (result && result.settings.showIcon) {
+        chrome.storage.sync.get("dict_settings", result => {
+          console.log(result.dict_settings.showIcon);
+          if (result && result.dict_settings.showIcon == true) {
             translator.showButton(p.top - bodyRect.top - 30, p.right);
           }
         });
