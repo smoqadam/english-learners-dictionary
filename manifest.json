@@ -35,8 +35,7 @@
     "style/style.css"
   ],
   "options_ui":{
-    "page": "src/setting/settings.html",
-    "open_in_tab": true
+    "page": "src/setting/settings.html"
   },
   "applications": {
     "gecko": {
