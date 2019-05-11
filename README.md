@@ -5,7 +5,7 @@ It using the Oxford dictionary and gives you the definition, phonetic, examples 
 
 [Download for Firefox](https://addons.mozilla.org/en-US/firefox/addon/english-to-english-dictionary/)
 
-Chrome (Pending)
+[Download for Chrome](https://chrome.google.com/webstore/detail/english-to-english-dictio/aggmgejbkkjpgapfhbigiceaeaabfnpo)
 
 ![screenshot](https://user-images.githubusercontent.com/1223848/57301498-c712fc80-710b-11e9-8a92-bcad9fce1c2e.jpg)
 
