@@ -7,7 +7,6 @@ browser.contextMenus.create({
 });
 
 browser.contextMenus.onClicked.addListener(function(info, tab) {
-  console.log({ id: info.menuItemId });
   switch (info.menuItemId) {
     case MENU_ID:
       chrome.tabs.query(
@@ -43,5 +42,10 @@ var get = function(word) {
   )
   .then(json => {
       return json[0];
+  })
+  .catch(err => {
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+      chrome.tabs.sendMessage(tabs[0].id, {notFound: true});
+    });
   });
 };

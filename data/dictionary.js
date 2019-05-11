@@ -85,14 +85,16 @@ let translator = {
       var $this = this;
       var selection = this.selection;
       chrome.storage.sync.get(selection, res => {
-          if (res[selection]) {
-            $this.showPopup(res[this.selection]);
-          } else {
-            chrome.runtime.sendMessage({ word: this.selection }, function(result) {
-                $this.showPopup(result);
-            });
-          }
-      })
+        if (res[selection]) {
+          $this.showPopup(res[this.selection]);
+        } else {
+          chrome.runtime.sendMessage({ word: this.selection }, function(
+            result
+          ) {
+            $this.showPopup(result);
+          });
+        }
+      });
     }
   },
   showPopup: function(response) {
@@ -141,17 +143,17 @@ let translator = {
       this.hideLoading();
       this.showWindow();
       chrome.storage.sync.get("settings", result => {
-          if (result.settings.saveWords) {
-              let word = {};
-              word[response['word']] = response;
-              chrome.storage.sync.set(word);
-          }
+        if (result.settings.saveWords) {
+          let word = {};
+          word[response["word"]] = response;
+          chrome.storage.sync.set(word);
+        }
 
-          if (result.settings.hideWindow > 0) {
-              setTimeout(function(){
-                  translator.hideWindow();
-              }, result.settings.hideWindow);
-          }
+        if (result.settings.hideWindow > 0) {
+          setTimeout(function() {
+            translator.hideWindow();
+          }, result.settings.hideWindow);
+        }
       });
     }
   }
@@ -169,7 +171,9 @@ $(".tr-body").click(function(e) {
 });
 
 $(document).click(function(e) {
-  translator.hideWindow();
+  if (e.originalEvent.button == 0) {
+    translator.hideWindow();
+  }
 });
 
 $(".tr-body").on("click", ".tr-close", function() {
@@ -194,7 +198,7 @@ document.onmouseup = function(evt) {
         selection = s.toString();
         translator.setWord(selection);
         chrome.storage.sync.get("settings", result => {
-          if (result.settings.showIcon) {
+          if (result && result.settings.showIcon) {
             translator.showButton(p.top - bodyRect.top - 30, p.right);
           }
         });
@@ -204,6 +208,10 @@ document.onmouseup = function(evt) {
 };
 
 chrome.runtime.onMessage.addListener(function(req) {
-  translator.showLoading();
-  translator.fetchData();
+  if (req.notFound) {
+    translator.hideLoading();
+  } else {
+    translator.showLoading();
+    translator.fetchData();
+  }
 });
