@@ -35,7 +35,6 @@
     "style/style.css"
   ],
   "options_ui":{
-    "page": "src/setting/settings.html",
+    "page": "src/setting/settings.html"
   }
-
 }
