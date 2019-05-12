@@ -1,9 +1,9 @@
 {
   "manifest_version":2,
-  "name":"English To English dictionary",
+  "name":"Oxford dictionary",
   "author":"Saeed Moghadamzadeh",
-  "version":"0.5",
-  "description":"Easy to use and powerfull English To English dictionary. Including phonetics, synonyms and example for learning new words deeply.",
+  "version":"0.6",
+  "description":"Easy to use and powerfull Oxford dictionary. Including phonetics, synonyms and example for learning new words deeply.",
   "content_scripts":[
     {
       "matches":["<all_urls>"],
@@ -19,8 +19,10 @@
   "permissions": [
     "activeTab",
     "contextMenus",
-    "webRequest","webRequestBlocking",
-    "*://*.smoqadam.me/","storage"
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.smoqadam.me/",
+    "storage"
   ],
   "background":{
     "scripts":[
