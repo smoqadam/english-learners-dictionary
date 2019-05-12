@@ -3,9 +3,9 @@
 The best way to learn English is using the English to English dictionaries such as Oxford or Miriam Webster. With this extension you can check the definition of the selected word right inside the browser. 
 It using the Oxford dictionary and gives you the definition, phonetic, examples and synonyms of a word. 
 
-[Download for Firefox](https://addons.mozilla.org/en-US/firefox/addon/english-to-english-dictionary/)
+[Download for Firefox](https://addons.mozilla.org/en-US/firefox/addon/oxford-dictionary-addon)
 
-Chrome (Pending)
+[Download for Chrome](https://chrome.google.com/webstore/detail/english-to-english-dictio/aggmgejbkkjpgapfhbigiceaeaabfnpo)
 
 ![screenshot](https://user-images.githubusercontent.com/1223848/57301498-c712fc80-710b-11e9-8a92-bcad9fce1c2e.jpg)
 
