@@ -8,8 +8,8 @@
     {
       "matches":["<all_urls>"],
       "js":[
-        "data/jquery.min.js",
-        "data/dictionary.js"
+        "data/dictionary.js",
+        "data/script.js"
       ],
       "css":[
         "style/styles.css"
@@ -40,6 +40,14 @@
   "applications": {
     "gecko": {
       "id": "saeed.moqadam@gmail.com"
+    }
+  },
+  "browser_action":{
+    "browser_style": true,
+    "default_popup": "data/popup/popup.html",
+    "default_icon":{
+      "16":"icons/dictionary-16.png",
+      "32":"icons/dictionary-32.png"
     }
   }
 }
