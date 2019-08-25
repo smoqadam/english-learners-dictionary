@@ -2,7 +2,7 @@
   "manifest_version":2,
   "name":"Oxford dictionary",
   "author":"Saeed Moghadamzadeh",
-  "version":"0.6",
+  "version":"0.7",
   "description":"Easy to use and powerfull Oxford dictionary. Including phonetics, synonyms and example for learning new words deeply.",
   "content_scripts":[
     {
@@ -38,11 +38,6 @@
   ],
   "options_ui":{
     "page": "src/setting/settings.html"
-  },
-  "applications": {
-    "gecko": {
-      "id": "saeed.moqadam@gmail.com"
-    }
   },
   "browser_action":{
     "browser_style": true,

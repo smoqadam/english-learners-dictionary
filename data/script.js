@@ -66,7 +66,7 @@ document.onmouseup = function (evt) {
       if (p.left || p.top) {
         selection = s.toString();
         Dictionary.setWord(selection);
-        chrome.storage.sync.get("dict_settings", result => {
+        chrome.storage.sync.get("dict_settings", function(result) {
           if (result && result.dict_settings.showIcon == true) {
             Dictionary.showButton(p.top - bodyRect.top - 30, p.right);
           }
