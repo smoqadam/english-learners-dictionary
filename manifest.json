@@ -1,9 +1,9 @@
 {
   "manifest_version":2,
-  "name":"English To English dictionary",
+  "name":"Oxford dictionary",
   "author":"Saeed Moghadamzadeh",
-  "version":"0.4",
-  "description":"Easy to use and powerfull English To English dictionary. Including phonetics, synonyms and example for learning new words deeply.",
+  "version":"0.6",
+  "description":"Easy to use and powerfull Oxford dictionary. Including phonetics, synonyms and example for learning new words deeply.",
   "content_scripts":[
     {
       "matches":["<all_urls>"],
@@ -12,7 +12,8 @@
         "data/script.js"
       ],
       "css":[
-        "style/styles.css"
+        "style/styles.css",
+        "style/fontello.css"
       ]
     }
   ],
@@ -20,7 +21,7 @@
     "activeTab",
     "contextMenus",
     "webRequest","webRequestBlocking",
-    "*://*.smoqadam.me/","storage"
+    "*://*.smoqadam.me/","*://lex-audio.useremarkable.com/*","storage"
   ],
   "background":{
     "scripts":[
@@ -28,11 +29,12 @@
     ]
   },
   "icons":{
-    "16":"icons/dictionary-32.png"
+    "16":"icons/dictionary-16.png",
+    "32":"icons/dictionary-32.png"
   },
   "web_accessible_resources": [
     "icons/*",
-    "style/style.css"
+    "style/*"
   ],
   "options_ui":{
     "page": "src/setting/settings.html"

@@ -19,7 +19,7 @@ document.addEventListener(
   function() {
     chrome.storage.sync.get("dict_settings", function(res) {
       var showIcon = true,
-        saveWords = false,
+        saveWords = true,
         hideWindow = 0;
       if (res.dict_settings) {
         showIcon = res.dict_settings.showIcon;

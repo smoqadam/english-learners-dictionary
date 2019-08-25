@@ -33,7 +33,6 @@ let Dictionary = (function () {
     btn.style.backgroundRepeat = "no-repeat";
     btn.style.backgroundSize = "24px 24px";
     btn.addEventListener('click', function (e) {
-      console.log('a');
       e.preventDefault();
       Dictionary.fetchData();
       Dictionary.showPopup();
@@ -69,12 +68,26 @@ let Dictionary = (function () {
   function _header(data) {
     var header = _createElement('div', 'tr-header');
     var trWord = _createElement('span', 'tr-word', data.word);
-    var trPhon = _createElement('span', 'tr-pron', data.phonetic);
-    
+    var trPhon = _createElement('span', 'tr-phon', data.phonetic);
+    var trPron = _createElement('span', 'tr-pron');
+    var pronIcon = _createElement('i', 'icon-volume');
+    pronIcon.setAttribute('onclick', "(new Audio('"+data.pron+"')).play()");
+    trPron.appendChild(pronIcon);
     header.appendChild(trWord);
     header.appendChild(trPhon);
+    header.appendChild(trPron);
     return header;
   }
+
+  // function _header(data) {
+  //   var header = _createElement('div', 'tr-header');
+  //   var trWord = _createElement('span', 'tr-word', data.word);
+  //   var trPhon = _createElement('span', 'tr-pron', data.phonetic);
+    
+  //   header.appendChild(trWord);
+  //   header.appendChild(trPhon);
+  //   return header;
+  // }
 
   return {
     init: function () {

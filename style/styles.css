@@ -83,12 +83,20 @@
 
 }
 
-.tr-pron{
+.tr-phon{
     margin-left: 10px;
     font-size: 14px;
     color: rgb(201, 234, 255);
     font-family: Arial !important;
     font-weight: 550;
+}
+.tr-pron{
+    position: relative;
+    margin-left: 5px;
+}
+.tr-pron i:hover{
+    color: #fff;
+    cursor: pointer;
 }
 
 .tr-defs{
