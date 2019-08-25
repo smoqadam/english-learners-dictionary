@@ -22,11 +22,61 @@ let translator = {
     $(loading).appendTo("body");
     this.wrapper = $("body").find(".tr-body .tr-def-wrapper");
 
+  function _createButton() {
+    var wrapper = _createElement('div', 'tr-wrapper');
+    wrapper.style.display = "none";
+    var btn = _createElement('div', 'tr-button');
+    var btnImgURL = chrome.extension.getURL("icons/dictionary-32.png");
+    btn.style.backgroundImage = "url('" + btnImgURL + "')";
+    btn.style.backgroundPosition = "0% 0%";
+    btn.style.backgroundRepeat = "no-repeat";
+    btn.style.backgroundSize = "24px 24px";
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      Dictionary.fetchData();
+      Dictionary.showPopup();
+    });
+    wrapper.appendChild(btn);
+    return wrapper;
+  }
+
+  function _createBody() {
+    let defs = _createElement('ul', 'tr-defs');
+    let header = _createElement('div', 'tr-header');
+    let defWrapper = _createElement('div', 'tr-def-wrapper');
+    defWrapper.appendChild(header);
+    defWrapper.appendChild(defs);
+    let body = _createElement('div', 'tr-body');
+    body.appendChild(defWrapper);
+    let window = _createElement('div', 'tr-window');
+    window.appendChild(body);
+    return window;
+  }
+
+  function _createLoading() {
+    let loading = _createElement('div', 'tr-loading', 'Please wait...');
     var loadingImgURL = chrome.extension.getURL("icons/loading.gif");
-    document.querySelector(".tr-loading").style =
-      "background: url('" +
-      loadingImgURL +
-      "') 10px center no-repeat #2092cc !important; ";
+    loading.style.backgroundImage = "url('" + loadingImgURL + "')";
+    loading.style.backgroundPosition = "7px center";
+    loading.style.backgroundRepeat = "no-repeat";
+    loading.style.backgroundSize = "13px";
+    loading.style.backgroundColor = "#2092cc";
+    return loading;
+  }
+
+  function _header(data) {
+    var header = _createElement('div', 'tr-header');
+    var trWord = _createElement('span', 'tr-word', data.word);
+    var trPhon = _createElement('span', 'tr-phon', data.phonetic);
+    var trPron = _createElement('span', 'tr-pron');
+    var pronIcon = _createElement('i', 'icon-volume');
+    pronIcon.setAttribute('onclick', "(new Audio('"+data.pron+"')).play()");
+    trPron.appendChild(pronIcon);
+    header.appendChild(trWord);
+    header.appendChild(trPhon);
+    header.appendChild(trPron);
+    return header;
+  }
 
     var btnImgURL = chrome.extension.getURL("icons/dictionary-32.png");
     document.querySelector(".tr-button").style =

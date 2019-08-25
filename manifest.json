@@ -12,17 +12,16 @@
         "data/dictionary.js"
       ],
       "css":[
-        "style/styles.css"
+        "style/styles.css",
+        "style/fontello.css"
       ]
     }
   ],
   "permissions": [
     "activeTab",
     "contextMenus",
-    "webRequest",
-    "webRequestBlocking",
-    "*://*.smoqadam.me/",
-    "storage"
+    "webRequest","webRequestBlocking",
+    "*://*.smoqadam.me/","*://lex-audio.useremarkable.com/*","storage"
   ],
   "background":{
     "scripts":[
@@ -35,7 +34,7 @@
   },
   "web_accessible_resources": [
     "icons/*",
-    "style/style.css"
+    "style/*"
   ],
   "options_ui":{
     "page": "src/setting/settings.html"
