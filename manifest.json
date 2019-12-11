@@ -21,6 +21,7 @@
     "activeTab",
     "contextMenus",
     "webRequest","webRequestBlocking",
+    "http://localhost/*",
     "*://*.smoqadam.me/","*://lex-audio.useremarkable.com/*","storage"
   ],
   "background":{
@@ -34,7 +35,8 @@
   },
   "web_accessible_resources": [
     "icons/*",
-    "style/*"
+    "style/*",
+    "template.html"
   ],
   "options_ui":{
     "page": "src/setting/settings.html"

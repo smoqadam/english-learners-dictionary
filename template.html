@@ -1,0 +1,46 @@
+<div id="sm-tr-wrapper">
+    <div class="sm-tr-loading">Please waite...</div>
+    <div class="sm-tr-selected-button"></div>
+    <div id="sm-dict-tr-main-template">
+        <div class="tr-main-container">
+            <div class="tr-setting-btn"><i class="icon-cog-outline"></i></div>
+            <h2 class="tr-word">{{WORD}}</h2>
+            <div class="tr-pron">
+                <span class="tr-pron-pho" id="sm-dict-british-pron" ><i class="icon-volume" data-pron=""></i><span></span></span>
+                <span class="tr-pron-pho" id="sm-dict-american-pron"><i class="icon-volume" data-pron=""></i><span></span></span>
+            </div>
+            <input type="radio" id="tab1" name="tab" checked>
+            <label for="tab1">Definitions</label>
+            <input type="radio" id="tab2" name="tab">
+            <label for="tab2">Synonyms</label>
+            <input type="radio" id="tab3" name="tab">
+            <label for="tab3">Antonyms</label>
+            <div class="tr-main-content-container">
+                <div class="tr-tab-content" id="c1">
+                    <ul class="tr-defs">
+                    </ul>
+                </div>
+                <div class="tr-tab-content" id="c2">
+                    <ul class="tr-syn-list">
+                    </ul>
+                    <ul class="tr-related-list">
+                    </ul>
+                </div>
+                <div class="tr-tab-content" id="c3">
+                    <ul class="tr-ant-list">
+                    </ul>
+                    <ul class="tr-rel-ant-list">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <template id="tr-defs-list-item-template">
+        <li class="tr-defs-list-item">
+            <div class="tr-def"></div>
+            <h6>Examples:</h6>
+            <ul class="tr-example-list">
+            </ul>
+        </li>
+    </template>
+</div>

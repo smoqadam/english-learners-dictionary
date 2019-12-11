@@ -6,216 +6,268 @@
     top: 5px;
     left: 5px;
     font-weight: bold;
-    box-shadow: 0px 0px 13px -1px rgba(105,105,105,1);
+    box-shadow: 0px 0px 13px -1px rgba(105, 105, 105, 1);
     font-family: Arial !important;
     display: none;
     vertical-align: middle;
 }
 
-.tr-body {
+
+#sm-dict-tr-main-template {
     display: none;
-    z-index: 99999999;
-    background: #fff;
     position: fixed;
-    top: 5px;
-    left: 5px;
-    width: 450px;
-    height: 250px;
-    overflow-y: scroll;
-    box-shadow: 0px 0px 13px -1px rgba(105,105,105,1);
-    overflow: hidden;
-    font-family: Arial !important;
+    top: 10px;
+    left: 10px;
+    z-index: 10000;
+    background: #fff;
 }
 
-.tr-def-wrapper{
+#sm-dict-tr-main-template * {
+    line-height: normal;
+    margin:0;
+    padding:0;
+    color: #333333;
+}
+
+#sm-dict-tr-main-template .tr-main-container {
+
+    width: 400px;
+    box-shadow: 0 0 100px RGBa(0, 0, 0, 0.5);
+    border-radius: 3px;
+    padding: 1px 0 0 0;
     position: relative;
-    height: 100%;
-    width: 100%;
-    overflow: hidden; 
-    color: #626262 !important;
-    font-size: 14px !important;
-}
-.tr-body ul {
-    list-style: none;
-    max-height: 210px;
-    margin: 0 auto;
-    padding-left: 0;
-    max-height: 210px;
+
 }
 
-
-.tr-body ul li.tr-def {
-    border-bottom: 1px solid #dad1d1;
-    padding: 10px 0;
-    padding-left: 10px;
+#sm-dict-tr-main-template .tr-main-container input {
+    display: none;
 }
 
-.tr-window{
-    overflow: hidden;
+#sm-dict-tr-main-template .tr-main-container input:checked + label {
+    background: #fbfbfb;
+    border-top: 1px solid #0897ff;
+    color: #0897ff;
+
 }
 
-.tr-header {
-    padding: 8px;
-    background: #0897ff;
-    text-align: left !important;
+#sm-dict-tr-main-template .tr-main-container input#tab1:checked ~ .line {
+    left: 0%;
 }
 
-.tr-word{
-    font-size: 17px;
-    font-weight: bold;
-    color: white;
-    width: 50%;
-    text-transform: capitalize;
+#sm-dict-tr-main-template .tr-main-container input#tab1:checked ~ .tr-main-content-container #c1 {
+    opacity: 1;
+    z-index: 1000;
 }
 
-.tr-header .speaker{
+#sm-dict-tr-main-template .tr-main-container input#tab2:checked ~ .line {
+    left: 25%;
+}
+
+#sm-dict-tr-main-template .tr-main-container input#tab2:checked ~ .tr-main-content-container #c2 {
+    opacity: 1;
+    z-index: 1000;
+
+}
+
+#sm-dict-tr-main-template .tr-main-container input#tab3:checked ~ .line {
+    left: 50%;
+}
+
+#sm-dict-tr-main-template .tr-main-container input#tab3:checked ~ .tr-main-content-container #c3 {
+    opacity: 1;
+    z-index: 1000;
+
+}
+
+#sm-dict-tr-main-template .tr-main-container input#tab4:checked ~ .line {
+    left: 75%;
+}
+
+#sm-dict-tr-main-template .tr-main-container input#tab4:checked ~ .tr-main-content-container #c4 {
+    opacity: 1;
+    z-index: 1000;
+
+}
+
+#sm-dict-tr-main-template .tr-main-container label {
     display: inline-block;
+    line-height: 28px;
+    text-align: center;
+    color: #555;
+    position: relative;
+    transition: 0.25s background ease;
+    cursor: pointer;
+    font-size: 11px;
+    padding: 0 15px;
+}
+
+#sm-dict-tr-main-template .tr-main-container label:hover {
+    opacity: 1;
+    color: #0897ff;
+}
+
+#sm-dict-tr-main-template .tr-main-container .tr-main-content-container {
+    position: relative;
+    height: 200px;
+    font-size: 16px;
+    overflow: auto;
+
+
+}
+
+#sm-dict-tr-main-template .tr-main-container .tr-main-content-container .tr-tab-content {
+    position: absolute;
+    padding: 10px;
+    width: 90%;
+    top: 0;
+    opacity: 0;
+    transition: 0.25s ease;
+    color: #333;
+}
+
+#sm-dict-tr-main-template .tr-main-container .tr-main-content-container .tr-tab-content h3 {
+    font-weight: 200;
+    margin: 10px 0;
+}
+
+#sm-dict-tr-main-template .tr-main-container .tr-main-content-container .tr-tab-content p {
+    margin: 10px 0;
+}
+
+#sm-dict-tr-main-template .tr-main-container .tr-main-content-container .tr-tab-content p, .tr-main-container .tr-main-content-container .tr-tab-content i {
+    font-size: 13px;
+}
+
+#sm-dict-tr-main-template .tr-body {
+    width: 400px;
+    border: 1px solid #eee;
+}
+
+#sm-dict-tr-main-template .tr-setting-btn {
+    position: absolute;
+    right: 11px;
+    top: 15px;
+    font-size: 16px;
+    color: #0897fd;
+}
+
+#sm-dict-tr-main-template .tr-word {
+    color: #333333;
+    text-align: left;
+    font-family: Arial, serif;
+    text-transform: capitalize;
+    margin: 9px 15px;
+}
+
+#sm-dict-tr-main-template .tr-pron {
+    margin: 0 0 18px 15px;
+    text-align: left;
+}
+
+#sm-dict-tr-main-template .tr-pron .tr-pron-pho {
+    margin: 0 20px 0 0;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+}
+
+#sm-dict-tr-main-template .tr-pron i {
+    padding: 5px;
+    margin: 0 5px;
+    background: #eee;
+    color: #626262;
+    font-size: 10px;
+    cursor: pointer;
+    transition: 0.25s ease;
+
+}
+
+#sm-dict-tr-main-template .tr-pron i:hover {
+    color: #0897ff;
+}
+
+#sm-dict-tr-main-template .tr-defs {
+    font-family: Arial;
+    padding-left: 5px;
+    margin: 0;
+}
+
+#sm-dict-tr-main-template .tr-defs-list-item {
+    list-style: none;
+    border-bottom: 1px solid #0897ff;
+    padding: 10px 0;
+}
+
+#sm-dict-tr-main-template .tr-defs-list-item:last-child {
+    border-bottom: none;
+}
+
+#sm-dict-tr-main-template .tr-defs-list-item h6 {
+    padding: 0;
+    margin: 5px 0 0 5px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+#sm-dict-tr-main-template .tr-defs-list-item li {
+    font-size: 13px;
+    list-style: square;
+    margin: 5px 21px;
+}
+
+#sm-dict-tr-main-template .tr-def {
+    margin: 3px 0;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+#sm-dict-tr-main-template .tr-example-list {
+    margin: 10px 0 0 0;
+}
+
+#sm-dict-tr-main-template .tr-main-content-container ul
+{
+    list-style: none;
+    margin: 5px 0 0 5px;
+    padding: 5px 0 0 5px;
+}
+
+#sm-dict-tr-main-template .tr-main-content-container li {
+    display: inline-block;
+    padding: 4px;
+    font-family: Arial;
+    font-size: 13px;
+    margin: 5px 0;
+}
+
+#sm-dict-tr-main-template .tr-main-content-container li a {
+    color: #1a78fd;
+    text-decoration: none;
+    padding: 3px;
+    border: 1px solid #eeeeee;
+    border-radius: 10px;
+}
+
+#sm-dict-tr-main-template .tr-main-content-container li a:hover {
+    color: #4482fd;
+    border: 1px solid #4482fd;
+}
+
+.sm-tr-selected-button {
+    position: absolute;
     width: 24px;
     height: 24px;
-    background: transparent url("./speaker.svg") center center no-repeat;
-        background-size: auto;
-    -webkit-background-size: 24px 24px;
-    background-size: 24px 24px;
-    border: none;
-    position: relative;
-    top: 8px;
+    z-index: 100000;
     cursor: pointer;
+    display: none;
 
 }
 
-.tr-phon{
-    margin-left: 10px;
-    font-size: 14px;
-    color: rgb(201, 234, 255);
-    font-family: Arial !important;
-    font-weight: 550;
-}
-.tr-pron{
-    position: relative;
-    margin-left: 5px;
-}
-.tr-pron i:hover{
+.sm-tr-loading {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    padding: 4px 4px 4px 30px;
     color: #fff;
-    cursor: pointer;
-}
-
-.tr-defs{
-    height: 100%;
-    overflow-y: scroll;
-    margin: 0 auto !important;
-}
-.tr-defs .examples, .tr-defs .synonyms {
-    display: block !important;
-    margin-top: 8px !important;
-    margin-left: 21px !important;
-    text-align: left !important;
-    font-size: 12px;
-}
-
-div.tr-def{
-    font-weight: bold;
-    text-align: left !important;
-}
-
-.tr-button {
-    width: 32px;
-    height: 32px;
-    background-size: 32px 32px;
-    cursor: pointer;
-    z-index: 2000000000 !important;
-    position: absolute;
-}
-a.syn {
-    margin: 6px;
-    display: inline-block;
-    margin: 3px 0;
-    cursor: pointer;
-    color: #0897ff !important;
-}
-a.syn:hover{
-    text-decoration: underline !important;
-}
-.tr-pos {
-    font-weight: bold;
-    clear: both;
-}
-
-.tr-wrapper{
-    position: absolute;
-
-}
-.tr-close {
-    position: absolute;
-    display: inline-block;
-    width: 15px;
-    height: 15px;
-    overflow: hidden;
-    right: 15px;
-    top: 15px;
-    cursor: pointer;
-}
-
-.tr-close::before, .tr-close::after {
-    content: '';
-    position: absolute;
-    height: 2px;
-    width: 100%;
-    top: 50%;
-    left: 0;
-    margin-top: -1px;
-    background: rgb(255, 255, 255);
-}
-.tr-close::before {
-    -webkit-transform: rotate(45deg);
-    -moz-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    -o-transform: rotate(45deg);
-    transform: rotate(45deg);
-}
-.tr-close::after {
-    -webkit-transform: rotate(-45deg);
-    -moz-transform: rotate(-45deg);
-    -ms-transform: rotate(-45deg);
-    -o-transform: rotate(-45deg);
-    transform: rotate(-45deg);
-}
-
-.tr-close.fat::before, .tr-close.fat::after {
-    border-radius: 100%;
-}
-
-.tr-body li.tr-did-you-mean:hover{
-    cursor: pointer;
-    text-decoration: underline;
-}
-
-
-.tr-input-search {
-    padding: 10px;
-    width: 100%;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.tr-search {
-    width: 80%;
-    margin: auto;
-    padding: 15px;
-    background: #eee;
-    position: fixed;
-    z-index: 999999999;
-    left: 10%;
-    box-shadow: 0px 0px 17px 0px #333;
-    top: 50px;
-    font-size: 18px;
-}
-
-.tr-search-wrapper {
-    min-height: 100%;
-    min-width: 100%;
-    background-color: rgba(0,0,0,0.1);
-    position: fixed;
-    z-index: 99999999999;
-    top: 0;
-    left: 0;
+    z-index: 1000000;
+    display: none;
 }
