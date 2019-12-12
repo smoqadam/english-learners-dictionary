@@ -73,20 +73,27 @@ document.onmouseup = function (evt) {
 };
 
 function getSetting(key, callback, errorCallback) {
-    chrome.storage.sync.get('sm_tr_settings', result => {
-        if (result['sm_tr_settings'][key] !== undefined) {
-            callback(result['sm_tr_settings'][key]);
+    chrome.storage.sync.get('dict_settings', result => {
+        console.log({result});
+        if (result['dict_settings'][key] !== undefined) {
+            callback(result['dict_settings'][key]);
         } else {
-            errorCallback();
+            errorCallback(result['dict_settings']);
         }
     });
 }
 
 
+function switchTheme(theme) {
+    document.querySelector('.sm-tr-main-wrapper').id = 'sm-' + theme + '-tr-wrapper';
+}
+
 chrome.runtime.onMessage.addListener(function (req) {
     if (req.notFound) {
         hideLoading();
         hideButton();
+    } else if (req.theme) {
+      switchTheme(req.theme);  
     } else {
         Dictionary.showLoading();
         Dictionary.fetchData();
@@ -160,6 +167,8 @@ function makeList(elm, list, selector, title) {
 
 function showPopup(result) {
     let elm = document.querySelector("#sm-dict-tr-main-template");
+
+    elm.querySelector('a#sm-tr-setting-link').href = chrome.extension.getURL("src/setting/setting.html");
 
     // =============================================== WORD
     elm.querySelector('.tr-word').innerHTML = result.word + '<span class="sm-tr-pos">(' + result.pos + ')</span>';
@@ -239,10 +248,12 @@ function btnClick() {
         hideLoading();
     });
 }
-
 readFile(chrome.extension.getURL("template.html"), function (_res) {
     let mainElem = createElementFromHTML(_res);
-    mainElem.id = 'sm-' + theme + '-tr-wrapper';
+    getSetting('theme', function(theme) {
+        console.log({theme});
+        mainElem.id = 'sm-' + theme + '-tr-wrapper';
+    });
     let main = mainElem.querySelector("#sm-dict-tr-main-template");
     main.addEventListener('click', function (e) {
         e.stopPropagation();
@@ -294,9 +305,9 @@ function showButton(top, left) {
     btn.style.left = left + "px";
     btn.style.display = "table-cell";
 
-    setInterval(function () {
-        hideButton();
-    }, HIDE_BTN_SECOND * 1000);
+    // setInterval(function () {
+    //     hideButton();
+    // }, HIDE_BTN_SECOND * 1000);
 
 }
 

@@ -1,45 +1,87 @@
-document.querySelector("form").addEventListener("submit", function(e) {
-  e.preventDefault();
-  let dict_settings = {
-    saveWords: document.querySelector("#save-word").checked,
-    showIcon: document.querySelector("#show-icon").checked,
-    hideWindow: document.querySelector("#hide-window").value * 1000 || 0
+class Settings {
+  settings = {
+      theme: 'dark',
+      saveWord: true,
+      showIcon: true,
   };
 
-  setdict_settings(dict_settings);
+  constructor(settings) {
+    if (settings !== null) {
+      Object.assign(this.settings, settings);
+      chrome.storage.sync.set(this.settings);
+    }
+    let $this = this;
+    chrome.storage.sync.get("dict_settings", function (res) {
+      $this.settings = res;
+    });
+  }
 
+  set(key, value) {
+    this.settings[key] = value;
+    chrome.storage.sync.set({'dict_settings': this.settings});
+    if (key == 'theme') {
+      browser.tabs.query({
+        currentWindow: true,
+      }).then(function(tabs){
+        for (let tab of tabs) {
+          browser.tabs.sendMessage(
+              tab.id,
+              {theme: value}
+          ).then(response => {
+            console.log("Message from the content script:");
+            console.log(response.response);
+          }).catch(onError);
+        }
+      });
+      // chrome.tabs.sendMessage(tabs[0].id, {theme: value});
+    }
+  }
+
+  get(key) {
+    let value ;
+    let a= chrome.storage.sync.get("dict_settings", function (res) {
+      value = res[key];
+    });
+    console.log({value});
+    console.log({a});
+    return value;
+  }
+
+  getAll(callback){
+    chrome.storage.sync.get("dict_settings", res => {
+      this.settings = res['dict_settings'];
+      callback(this.settings)
+    });
+  }
+}
+
+let settings = new Settings();
+
+document.querySelector("form").addEventListener("submit", function (e) {
+  e.preventDefault();
+  let theme = (document.querySelector("#theme").checked ? 'dark' : 'light');
+  console.log({theme})
+  settings.set('saveWord', document.querySelector("#save-word").checked);
+  settings.set('theme', theme);
+  settings.set('showIcon', document.querySelector("#show-icon").checked);
   document.querySelector("#msg").innerHTML = "Saved";
-  setTimeout(function() {
+  setTimeout(function () {
     document.querySelector("#msg").innerHTML = "";
   }, 2000);
 });
-
+//
 document.addEventListener(
-  "DOMContentLoaded",
-  function() {
-    chrome.storage.sync.get("dict_settings", function(res) {
-      var showIcon = true,
-        saveWords = true,
-        hideWindow = 0;
-      if (res.dict_settings) {
-        showIcon = res.dict_settings.showIcon;
-        saveWords = res.dict_settings.saveWords;
-        hideWindow = res.dict_settings.hideWindow / 1000;
-      }
-      document.querySelector("#show-icon").checked = showIcon;
-      document.querySelector("#save-word").checked = saveWords;
-      document.querySelector("#hide-window").value = hideWindow;
-      setdict_settings({
-        saveWords: saveWords,
-        showIcon: showIcon,
-        hideWindow: hideWindow
+    "DOMContentLoaded",
+    function () {
+      settings.getAll(function (res) {
+        console.log({res});
+        document.querySelector("#show-icon").checked = res['showIcon'];
+        document.querySelector("#save-word").checked = res['saveWord'];
+        document.querySelector("#theme").checked = res['theme'] === 'dark';
       });
-    });
-  },
-  false
-);
 
-var setdict_settings = function(dict_settings) {
-  chrome.storage.sync.set({ dict_settings });
-};
-
+      console.log(settings.get('theme'), '');
+      console.log({
+        s: settings.settings
+      })
+    }, false);

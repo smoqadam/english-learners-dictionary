@@ -222,7 +222,7 @@
     cursor: pointer;
     color: #7e7e7e;
     transition: 0.25s ease;
-
+    text-transform: uppercase;
 }
 #sm-dict-tr-main-template .tr-defs-list-item h6:hover {
     color: #4778f4;
@@ -299,12 +299,16 @@
 #sm-dict-tr-main-template .tr-defs-list-item h6 ~ ul li{
     margin: 0 0 0 20px;
 }
-#sm-dict-tr-main-template .tr-defs-list-item h6 ~ ul li:before{
-    content: '⏺ ';
-    margin-right: 4px;
-    font-weight: bold;
-    color: #757575;
-}
+/*#sm-dict-tr-main-template .tr-defs-list-item h6 ~ ul li:before :not(.sm-tr-tag){*/
+/*    content: '⏺ ';*/
+/*    margin-right: 4px;*/
+/*    font-weight: bold;*/
+/*    color: #757575;*/
+/*}*/
+/*#sm-dict-tr-main-template .tr-defs-list-item h6 ~ ul li.sm-tr-tag::before {*/
+/*    content: '';*/
+/*}*/
+
 #sm-dict-tr-main-template .tr-defs-list-item h6#closed-title:before {
     content: "\23F5 ";
     margin-right: 2px;
@@ -334,4 +338,10 @@
 #sm-dict-tr-main-template ul.tr-example-list li {
     display: inline-block;
     color: #0042a0;
+}
+#sm-dict-tr-main-template ul.tr-example-list li:before {
+    content: '⏺ ';
+    margin-right: 4px;
+    font-weight: bold;
+    color: #757575;
 }

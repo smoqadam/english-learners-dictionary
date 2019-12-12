@@ -1,9 +1,10 @@
 {
   "manifest_version":2,
-  "name":"Oxford dictionary",
+  "name":"English Learner's Dictionary",
   "author":"Saeed Moghadamzadeh",
-  "version":"0.6",
-  "description":"Easy to use and powerfull Oxford dictionary. Including phonetics, synonyms and example for learning new words deeply.",
+  "version":"1.0",
+  "description":"English Learner's Dictionary is here to help you to learn English words deeply with many useful information about the word such as collocations, examples, synonyms, related words, antonyms and more.",
+
   "content_scripts":[
     {
       "matches":["<all_urls>"],
@@ -36,6 +37,7 @@
   "web_accessible_resources": [
     "icons/*",
     "style/*",
+    "src/setting/*",
     "template.html"
   ],
   "options_ui":{

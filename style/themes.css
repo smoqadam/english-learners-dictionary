@@ -13,6 +13,13 @@
     color: #0897ff;
 }
 
+#sm-light-tr-wrapper #sm-dict-tr-main-template .tr-main-container a#sm-tr-setting-link {
+    color: #89b1fd;
+}
+#sm-light-tr-wrapper #sm-dict-tr-main-template .tr-main-container a#sm-tr-setting-link:hover {
+    color: #555;
+}
+
 #sm-light-tr-wrapper #sm-dict-tr-main-template .tr-main-container label {
     color: #555;
 }
