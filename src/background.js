@@ -31,7 +31,7 @@ chrome.runtime.onMessage.addListener(function(req, sender, sendResponse){
 });
 
 var get = function(word) {
-    var url = ("http://w.smoqadam.me/get/" + word).trim().toLowerCase();
+    var url = ("https://w.smoqadam.me/get/" + word).trim().toLowerCase();
     console.log({url});
   return fetch(url).then(
     response => {

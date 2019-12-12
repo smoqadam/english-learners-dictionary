@@ -94,14 +94,14 @@ function makeList(elm, list, selector, title) {
     }
     let titleElem = document.createElement('h6');
     let listElement = elm.querySelector(selector);
-    listElement.innerHTML = '';
-    titleElem.innerHTML = title;
+    listElement.textContent = '';
+    titleElem.textContent = title;
     listElement.appendChild(titleElem);
     list.forEach(function (e, i) {
         let li = document.createElement('li');
         let anchor = document.createElement('a');
         anchor.href = '#';
-        anchor.innerHTML = e;
+        anchor.textContent = e;
         anchor.className = 'sm-tr-tag';
         anchor.addEventListener('click', function () {
             selectedWord = e;
@@ -118,24 +118,27 @@ function showPopup(result) {
 
     elm.querySelector('a#sm-tr-setting-link').href = chrome.extension.getURL("src/setting/setting.html");
     // =============================================== WORD
-    elm.querySelector('.tr-word').innerHTML = result.word + '<span class="sm-tr-pos">(' + result.pos + ')</span>';
+    elm.querySelector('.sm-tr-word').textContent = result.word;
+    elm.querySelector('.sm-tr-pos').textContent = result.pos;
+
+
     // =============================================== Pronunciation and phonetics
     let pronB = elm.querySelector('#sm-dict-british-pron');
     let pronA = elm.querySelector('#sm-dict-american-pron');
     pronB.querySelector('i').dataset.pron = result.pron.audio.British;
-    pronB.querySelector('span').innerHTML = result.pron.phon.British;
+    pronB.querySelector('span').textContent = result.pron.phon.British;
 
     pronA.querySelector('i').dataset.pron = result.pron.audio.American;
-    pronA.querySelector('span').innerHTML = result.pron.phon.American;
+    pronA.querySelector('span').textContent = result.pron.phon.American;
 
     // =============================================== DEFINITIONS
     let defs = elm.querySelector('.tr-defs');
-    defs.innerHTML = '';
+    defs.textContent = '';
     result.defs.forEach(function (e, i) {
         let deftemplate = document.querySelector('#tr-defs-list-item-template');
         let clone = document.importNode(deftemplate.content, true);
 
-        clone.querySelector('.tr-def').innerHTML = e.definition;
+        clone.querySelector('.tr-def').textContent = e.definition;
 
         let collList = clone.querySelector('.tr-coll-list');
         let exTitle = clone.querySelector('h6');
@@ -143,11 +146,11 @@ function showPopup(result) {
             let colls = result.defs[i]['collocations'];
             Object.keys(colls).forEach(function (k) {
                 let cult = document.createElement('h6');
-                cult.innerHTML = k;
+                cult.textContent = k;
                 let cul = document.createElement('ul');
                 colls[k].forEach(function (f) {
                     let cli = document.createElement('li');
-                    cli.innerHTML = f;
+                    cli.textContent = f;
                     cli.className = 'sm-tr-tag';
                     cul.appendChild(cli);
                 });
@@ -165,7 +168,7 @@ function showPopup(result) {
                     return;
                 }
                 let exElm = document.createElement('li');
-                exElm.innerHTML = ex;
+                exElm.textContent = ex;
                 clone.querySelector('.tr-example-list').appendChild(exElm);
             });
         } else {
@@ -201,7 +204,6 @@ readFile(chrome.extension.getURL("template.html"), function (_res) {
     main.addEventListener('click', function (e) {
         e.stopPropagation();
     });
-
     let btn = mainElem.querySelector('.sm-tr-selected-button');
     btn.style.backgroundPosition = "0% 0%";
     btn.style.backgroundRepeat = "no-repeat";
@@ -230,7 +232,7 @@ readFile(chrome.extension.getURL("template.html"), function (_res) {
 
 function createElementFromHTML(htmlString) {
     let div = document.createElement('div');
-    div.innerHTML = htmlString.trim();
+        div.insertAdjacentHTML('afterbegin', htmlString.trim());
     return div.firstChild;
 }
 

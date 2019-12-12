@@ -1,27 +1,21 @@
-class Settings {
-    settings = {
+    config = {
         theme: 'dark',
         // saveWord: true,
         showIcon: true,
     };
-
-    constructor(settings) {
-        if (settings !== null) {
-            Object.assign(this.settings, settings);
-            chrome.storage.sync.set(this.settings);
-        }
-        let $this = this;
+    //
+    function init(settings) {
         chrome.storage.sync.get("dict_settings", function (res) {
-            $this.settings = res;
+            config = res;
         });
     }
 
-    set(key, value) {
-        this.settings[key] = value;
-        chrome.storage.sync.set({'dict_settings': this.settings});
+    function set(key, value) {
+        config[key] = value;
+        chrome.storage.sync.set({'dict_settings': config});
     }
 
-    get(key) {
+    function get(key) {
         let value;
         let a = chrome.storage.sync.get("dict_settings", function (res) {
             value = res[key];
@@ -29,15 +23,12 @@ class Settings {
         return value;
     }
 
-    getAll(callback) {
+    function getAll(callback) {
         chrome.storage.sync.get("dict_settings", res => {
-            this.settings = res['dict_settings'];
-            callback(this.settings)
+            config = res['dict_settings'];
+            callback(config)
         });
     }
-}
-
-let setting = new Settings();
 
 document.querySelector("form").addEventListener("submit", function (e) {
     e.preventDefault();
@@ -46,9 +37,9 @@ document.querySelector("form").addEventListener("submit", function (e) {
 
 
     // setting.set('saveWord', parseInt(form.get('saveWord')));
-    setting.set('theme', (form.get('theme')));
-    setting.set('showIcon', parseInt(form.get('showIcon')));
-    document.querySelector("#msg").innerHTML = "Saved";
+    set('theme', (form.get('theme')));
+    set('showIcon', parseInt(form.get('showIcon')));
+    document.querySelector("#msg").textContent = "Saved";
     document.querySelector("#msg").style.opacity = 1;
     setTimeout(function () {
         document.querySelector("#msg").style.opacity = 0;
@@ -57,7 +48,7 @@ document.querySelector("form").addEventListener("submit", function (e) {
 document.addEventListener(
     "DOMContentLoaded",
     function () {
-        setting.getAll(function (res) {
+        getAll(function (res) {
             if (res['showIcon']) {
                 document.querySelector("#show-icon-yes").checked = true;
             } else {

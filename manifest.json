@@ -1,17 +1,18 @@
 {
-  "manifest_version":2,
-  "name":"English Learner's Dictionary",
-  "author":"Saeed Moghadamzadeh",
-  "version":"1.0",
-  "description":"English Learner's Dictionary is an open-source browser extension which helps you to lookup the word definitions, synonyms, antonyms, examples, collocations, American and British pronunciation and etc.",
-
-  "content_scripts":[
+  "manifest_version": 2,
+  "name": "English Learner's Dictionary",
+  "author": "Saeed Moghadamzadeh",
+  "version": "1.0",
+  "description": "English Learner's Dictionary is an open-source browser extension which helps you to lookup the word definitions, synonyms, antonyms, examples, collocations, American and British pronunciation and etc.",
+  "content_scripts": [
     {
-      "matches":["<all_urls>"],
-      "js":[
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
         "data/script.js"
       ],
-      "css":[
+      "css": [
         "style/styles.css",
         "style/themes.css",
         "style/fontello.css"
@@ -21,17 +22,20 @@
   "permissions": [
     "activeTab",
     "contextMenus",
-    "webRequest","webRequestBlocking",
-    "*://*.smoqadam.me/","*://*.oxfordlearnersdictionaries.com/*","storage"
+    "webRequest",
+    "webRequestBlocking",
+    "*://*.smoqadam.me/",
+    "*://*.oxfordlearnersdictionaries.com/*",
+    "storage"
   ],
-  "background":{
-    "scripts":[
+  "background": {
+    "scripts": [
       "src/background.js"
     ]
   },
-  "icons":{
-    "16":"icons/dictionary-16.png",
-    "32":"icons/dictionary-32.png"
+  "icons": {
+    "16": "icons/dictionary-16.png",
+    "32": "icons/dictionary-32.png"
   },
   "web_accessible_resources": [
     "icons/*",
@@ -40,7 +44,7 @@
     "template.html",
     "settings.html"
   ],
-  "options_ui":{
+  "options_ui": {
     "page": "settings.html"
   },
   "applications": {
@@ -48,12 +52,13 @@
       "id": "saeed.moqadam@gmail.com"
     }
   },
-  "browser_action":{
+  "browser_action": {
     "browser_style": true,
     "default_popup": "data/popup/popup.html",
-    "default_icon":{
-      "16":"icons/dictionary-16.png",
-      "32":"icons/dictionary-32.png"
+    "default_icon": {
+      "16": "icons/dictionary-16.png",
+      "32": "icons/dictionary-32.png"
     }
-  }
+  },
+  "content_security_policy": "default-src 'self' https://w.smoqadam.me;"
 }
