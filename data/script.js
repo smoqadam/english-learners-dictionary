@@ -52,7 +52,10 @@
 //     }
 //   }
 // })
-var selectedWord;
+let selectedWord;
+let theme = 'dark';
+const HIDE_BTN_SECOND = 4;
+
 document.onmouseup = function (evt) {
     let selection;
     let s = document.getSelection(),
@@ -69,6 +72,17 @@ document.onmouseup = function (evt) {
     }
 };
 
+function getSetting(key, callback, errorCallback) {
+    chrome.storage.sync.get('sm_tr_settings', result => {
+        if (result['sm_tr_settings'][key] !== undefined) {
+            callback(result['sm_tr_settings'][key]);
+        } else {
+            errorCallback();
+        }
+    });
+}
+
+
 chrome.runtime.onMessage.addListener(function (req) {
     if (req.notFound) {
         hideLoading();
@@ -80,13 +94,12 @@ chrome.runtime.onMessage.addListener(function (req) {
 });
 
 function readFile(_path, _cb) {
-    console.log({_path});
     fetch(_path, {mode: 'same-origin'})   // <-- important
         .then(function (_res) {
             return _res.blob();
         })
         .then(function (_blob) {
-            var reader = new FileReader();
+            let reader = new FileReader();
             reader.addEventListener("loadend", function () {
                 _cb(this.result);
             });
@@ -107,16 +120,15 @@ function next(elem) {
     return elem;
 }
 
-function hideNext() {
-    console.log('aa');
-    var nextElem = next(this);
-    console.log(nextElem.style.display);
-
+function toggleNext() {
+    let nextElem = next(this);
     if (nextElem) {
-        if (nextElem.style.display === 'none' || nextElem.style.display == '') {
+        if (nextElem.style.display === 'none' || nextElem.style.display === '') {
             nextElem.style.display = 'block';
+            this.id = 'opened-title';
         } else {
             nextElem.style.display = 'none';
+            this.id = 'closed-title';
         }
     }
 }
@@ -125,18 +137,21 @@ function makeList(elm, list, selector, title) {
     if (list === undefined) {
         return;
     }
-    var titleElem = document.createElement('h6');
-    var listElement = elm.querySelector(selector);
+    let titleElem = document.createElement('h6');
+    let listElement = elm.querySelector(selector);
     listElement.innerHTML = '';
     titleElem.innerHTML = title;
     listElement.appendChild(titleElem);
     list.forEach(function (e, i) {
-        var li = document.createElement('li');
-        var anchor = document.createElement('a');
+        let li = document.createElement('li');
+        let anchor = document.createElement('a');
         anchor.href = '#';
         anchor.innerHTML = e;
         anchor.className = 'sm-tr-tag';
-
+        anchor.addEventListener('click', function () {
+            selectedWord = e;
+            btnClick();
+        });
         li.appendChild(anchor);
         listElement.appendChild(li);
     });
@@ -144,44 +159,38 @@ function makeList(elm, list, selector, title) {
 }
 
 function showPopup(result) {
-    console.log(result);
-    var elm = document.getElementById("sm-dict-tr-main-template");
+    let elm = document.querySelector("#sm-dict-tr-main-template");
 
     // =============================================== WORD
-    elm.querySelector('.tr-word').innerHTML = result.word;
-
+    elm.querySelector('.tr-word').innerHTML = result.word + '<span class="sm-tr-pos">(' + result.pos + ')</span>';
     // =============================================== Pronunciation and phonetics
-    var pronB = elm.querySelector('#sm-dict-british-pron');
-    var pronA = elm.querySelector('#sm-dict-american-pron');
+    let pronB = elm.querySelector('#sm-dict-british-pron');
+    let pronA = elm.querySelector('#sm-dict-american-pron');
     pronB.querySelector('i').dataset.pron = result.pron.audio.British;
     pronB.querySelector('span').innerHTML = result.pron.phon.British;
 
     pronA.querySelector('i').dataset.pron = result.pron.audio.American;
     pronA.querySelector('span').innerHTML = result.pron.phon.American;
 
-
     // =============================================== DEFINITIONS
-    var defs = elm.querySelector('.tr-defs');
+    let defs = elm.querySelector('.tr-defs');
     defs.innerHTML = '';
     result.defs.forEach(function (e, i) {
-        var deftemplate = document.querySelector('#tr-defs-list-item-template');
-        var clone = document.importNode(deftemplate.content, true);
+        let deftemplate = document.querySelector('#tr-defs-list-item-template');
+        let clone = document.importNode(deftemplate.content, true);
 
         clone.querySelector('.tr-def').innerHTML = e.definition;
 
-        var collList = clone.querySelector('.tr-coll-list');
-        var exTitle = clone.querySelector('h6');
+        let collList = clone.querySelector('.tr-coll-list');
+        let exTitle = clone.querySelector('h6');
         if (result.defs[i]['collocations'] !== undefined) {
-            var colls = result.defs[i]['collocations'];
-            console.log(Object.keys(colls));
-            console.log(colls);
-
+            let colls = result.defs[i]['collocations'];
             Object.keys(colls).forEach(function (k) {
-                var cult = document.createElement('h6');
+                let cult = document.createElement('h6');
                 cult.innerHTML = k;
-                var cul = document.createElement('ul');
+                let cul = document.createElement('ul');
                 colls[k].forEach(function (f) {
-                    var cli = document.createElement('li');
+                    let cli = document.createElement('li');
                     cli.innerHTML = f;
                     cli.className = 'sm-tr-tag';
                     cul.appendChild(cli);
@@ -191,26 +200,28 @@ function showPopup(result) {
             })
         }
         clone.querySelectorAll('h6').forEach(function (h) {
-            h.addEventListener('click', hideNext);
+            h.id = 'closed-title';
+            // if (!next(this).querySelectorAll('li').length){
+            //     this.style.display = 'none';
+            // }
+            h.addEventListener('click', toggleNext);
         });
-
-        var examples = result.defs[i].examples;
-        if (examples.length === 0) {
+        if (result['defs'][i]['examples'] !== undefined) {
+            result['defs'][i]['examples'].forEach(function (ex, i) {
+                if (i > 2) {
+                    return;
+                }
+                let exElm = document.createElement('li');
+                exElm.innerHTML = ex;
+                clone.querySelector('.tr-example-list').appendChild(exElm);
+            });
+        } else {
             exTitle.style.display = 'none';
         }
-        examples.forEach(function (ex, i) {
-            if (i > 2) {
-                return;
-            }
-            var exElm = document.createElement('li');
-            exElm.innerHTML = ex;
-            clone.querySelector('.tr-example-list').appendChild(exElm);
-        });
         defs.appendChild(clone);
     });
 
-    // =============================================== SYNONYMS
-
+    // =============================================== SYNONYMS and ANTONYMS tabs
     makeList(elm, result['synonyms'], '.tr-syn-list', 'Synonyms');
     makeList(elm, result['related'], '.tr-related-list', 'Related Words');
     makeList(elm, result['antonyms'], '.tr-ant-list', 'Antonyms');
@@ -220,31 +231,33 @@ function showPopup(result) {
 }
 
 function btnClick() {
+    hideButton();
+    hidePopup();
     showLoading();
     fetchData(selectedWord, function (result) {
         showPopup(result);
         hideLoading();
-        hideButton();
     });
 }
 
 readFile(chrome.extension.getURL("template.html"), function (_res) {
     let mainElem = createElementFromHTML(_res);
-
-    mainElem.querySelector("#sm-dict-tr-main-template").addEventListener('click', function (e) {
+    mainElem.id = 'sm-' + theme + '-tr-wrapper';
+    let main = mainElem.querySelector("#sm-dict-tr-main-template");
+    main.addEventListener('click', function (e) {
         e.stopPropagation();
     });
 
-    var btn = mainElem.querySelector('.sm-tr-selected-button');
+    let btn = mainElem.querySelector('.sm-tr-selected-button');
     btn.style.backgroundPosition = "0% 0%";
     btn.style.backgroundRepeat = "no-repeat";
     btn.style.backgroundSize = "24px 24px";
     btn.style.backgroundImage = 'url("' + chrome.extension.getURL("icons/dictionary-32.png") + '")';
     btn.addEventListener('click', btnClick);
 
-    var loading = mainElem.querySelector('.sm-tr-loading');
+    let loading = mainElem.querySelector('.sm-tr-loading');
 
-    var loadingImgURL = chrome.extension.getURL("icons/loading.gif");
+    let loadingImgURL = chrome.extension.getURL("icons/loading.gif");
     loading.style.backgroundImage = "url('" + loadingImgURL + "')";
     loading.style.backgroundPosition = "7px center";
     loading.style.backgroundRepeat = "no-repeat";
@@ -253,49 +266,51 @@ readFile(chrome.extension.getURL("template.html"), function (_res) {
 
     mainElem.querySelectorAll('.tr-pron i').forEach(function (e) {
         e.addEventListener('click', function () {
-            console.log(this.dataset.pron);
             (new Audio(this.dataset.pron)).play();
         })
     });
 
-    // Change this to div.childNodes to support multiple top-level nodes
-    console.log(mainElem);
     document.querySelector('body').appendChild(mainElem);
 });
 
 
 function createElementFromHTML(htmlString) {
-    var div = document.createElement('div');
+    let div = document.createElement('div');
     div.innerHTML = htmlString.trim();
     return div.firstChild;
 }
 
-document.onload = function () {
-
-};
-
 document.querySelector('body').addEventListener('click', function (e) {
-    document.getElementById("sm-dict-tr-main-template").style.display = 'none';
+    hidePopup();
 });
 
+function hidePopup() {
+    document.getElementById("sm-dict-tr-main-template").style.display = 'none';
+}
+
 function showButton(top, left) {
-    var btn = document.querySelector('.sm-tr-selected-button');
+    let btn = document.querySelector('.sm-tr-selected-button');
     btn.style.top = top + "px";
     btn.style.left = left + "px";
     btn.style.display = "table-cell";
+
+    setInterval(function () {
+        hideButton();
+    }, HIDE_BTN_SECOND * 1000);
+
 }
 
 function hideButton() {
-    var btn = document.querySelector('.sm-tr-selected-button');
+    let btn = document.querySelector('.sm-tr-selected-button');
     btn.style.display = "none";
 }
 
 function showLoading() {
-    var loading = document.querySelector('.sm-tr-loading');
+    let loading = document.querySelector('.sm-tr-loading');
     loading.style.display = "block";
 }
 
 function hideLoading() {
-    var loading = document.querySelector('.sm-tr-loading');
+    let loading = document.querySelector('.sm-tr-loading');
     loading.style.display = "none";
 }
