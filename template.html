@@ -1,13 +1,15 @@
 <div id="sm-tr-wrapper">
     <div class="sm-tr-loading">Please waite...</div>
     <div class="sm-tr-selected-button"></div>
-    <div id="sm-dict-tr-main-template">
+    <div id="sm-dark-dict-tr-main-template">
         <div class="tr-main-container">
             <div class="tr-setting-btn"><i class="icon-cog-outline"></i></div>
             <h2 class="tr-word">{{WORD}}</h2>
             <div class="tr-pron">
-                <span class="tr-pron-pho" id="sm-dict-british-pron" ><i class="icon-volume" data-pron=""></i><span></span></span>
-                <span class="tr-pron-pho" id="sm-dict-american-pron"><i class="icon-volume" data-pron=""></i><span></span></span>
+                <span class="tr-pron-pho" id="sm-dict-british-pron"><i class="icon-volume"
+                                                                       data-pron=""></i><span></span></span>
+                <span class="tr-pron-pho" id="sm-dict-american-pron"><i class="icon-volume"
+                                                                        data-pron=""></i><span></span></span>
             </div>
             <input type="radio" id="tab1" name="tab" checked>
             <label for="tab1">Definitions</label>
@@ -38,7 +40,10 @@
     <template id="tr-defs-list-item-template">
         <li class="tr-defs-list-item">
             <div class="tr-def"></div>
-            <h6>Examples:</h6>
+            <h6 class="sm-tr-ex-title">Collocations</h6>
+            <ul class="tr-coll-list">
+            </ul>
+            <h6 class="sm-tr-ex-title">Examples</h6>
             <ul class="tr-example-list">
             </ul>
         </li>

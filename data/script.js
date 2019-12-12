@@ -99,6 +99,50 @@ function fetchData(selection, callback) {
     chrome.runtime.sendMessage({word: selection}, callback);
 }
 
+
+function next(elem) {
+    do {
+        elem = elem.nextSibling;
+    } while (elem && elem.nodeType !== 1);
+    return elem;
+}
+
+function hideNext() {
+    console.log('aa');
+    var nextElem = next(this);
+    console.log(nextElem.style.display);
+
+    if (nextElem) {
+        if (nextElem.style.display === 'none' || nextElem.style.display == '') {
+            nextElem.style.display = 'block';
+        } else {
+            nextElem.style.display = 'none';
+        }
+    }
+}
+
+function makeList(elm, list, selector, title) {
+    if (list === undefined) {
+        return;
+    }
+    var titleElem = document.createElement('h6');
+    var listElement = elm.querySelector(selector);
+    listElement.innerHTML = '';
+    titleElem.innerHTML = title;
+    listElement.appendChild(titleElem);
+    list.forEach(function (e, i) {
+        var li = document.createElement('li');
+        var anchor = document.createElement('a');
+        anchor.href = '#';
+        anchor.innerHTML = e;
+        anchor.className = 'sm-tr-tag';
+
+        li.appendChild(anchor);
+        listElement.appendChild(li);
+    });
+    return listElement;
+}
+
 function showPopup(result) {
     console.log(result);
     var elm = document.getElementById("sm-dict-tr-main-template");
@@ -118,18 +162,46 @@ function showPopup(result) {
 
     // =============================================== DEFINITIONS
     var defs = elm.querySelector('.tr-defs');
+    defs.innerHTML = '';
     result.defs.forEach(function (e, i) {
         var deftemplate = document.querySelector('#tr-defs-list-item-template');
         var clone = document.importNode(deftemplate.content, true);
 
         clone.querySelector('.tr-def').innerHTML = e.definition;
+
+        var collList = clone.querySelector('.tr-coll-list');
+        var exTitle = clone.querySelector('h6');
+        if (result.defs[i]['collocations'] !== undefined) {
+            var colls = result.defs[i]['collocations'];
+            console.log(Object.keys(colls));
+            console.log(colls);
+
+            Object.keys(colls).forEach(function (k) {
+                var cult = document.createElement('h6');
+                cult.innerHTML = k;
+                var cul = document.createElement('ul');
+                colls[k].forEach(function (f) {
+                    var cli = document.createElement('li');
+                    cli.innerHTML = f;
+                    cli.className = 'sm-tr-tag';
+                    cul.appendChild(cli);
+                });
+                collList.appendChild(cult);
+                collList.appendChild(cul);
+            })
+        }
+        clone.querySelectorAll('h6').forEach(function (h) {
+            h.addEventListener('click', hideNext);
+        });
+
         var examples = result.defs[i].examples;
         if (examples.length === 0) {
-            console.log({examples});
-            var h = clone.querySelector('h6');
-            h.style.display = 'none';
+            exTitle.style.display = 'none';
         }
         examples.forEach(function (ex, i) {
+            if (i > 2) {
+                return;
+            }
             var exElm = document.createElement('li');
             exElm.innerHTML = ex;
             clone.querySelector('.tr-example-list').appendChild(exElm);
@@ -139,66 +211,10 @@ function showPopup(result) {
 
     // =============================================== SYNONYMS
 
-    if (result['synonyms'] !== undefined) {
-      var title = document.createElement('h6');
-
-      var synList = elm.querySelector('.tr-syn-list');
-        title.innerHTML = 'Synonyms';
-        synList.appendChild(title);
-        result.synonyms.forEach(function (e, i) {
-            var synLi = document.createElement('li');
-            var synA = document.createElement('a');
-            synA.href = '#';
-            synA.innerHTML = e;
-            synLi.appendChild(synA);
-            synList.appendChild(synLi);
-        });
-    }
-
-    if (result['related'] !== undefined) {
-      var title = document.createElement('h6');
-      var relList = elm.querySelector('.tr-related-list');
-        title.innerHTML = 'Related Words';
-        relList.appendChild(title);
-        result.related.forEach(function (e, i) {
-            var synLi = document.createElement('li');
-            var synA = document.createElement('a');
-            synA.href = '#';
-            synA.innerHTML = e;
-            synLi.appendChild(synA);
-            relList.appendChild(synLi);
-        });
-    }
-
-    if (result['antonyms'] !== undefined) {
-      var title = document.createElement('h6');
-      var antList = elm.querySelector('.tr-ant-list');
-        title.innerHTML = 'Antonyms';
-        antList.appendChild(title);
-        result['antonyms'].forEach(function (e, i) {
-            var synLi = document.createElement('li');
-            var synA = document.createElement('a');
-            synA.href = '#';
-            synA.innerHTML = e;
-            synLi.appendChild(synA);
-            antList.appendChild(synLi);
-        });
-    }
-
-    if (result['near_ant'] !== undefined) {
-      var title = document.createElement('h6');
-      var relAntList = elm.querySelector('.tr-rel-ant-list');
-        title.innerHTML = 'Near Antonyms';
-        relAntList.appendChild(title);
-        result['near_ant'].forEach(function (e, i) {
-            var synLi = document.createElement('li');
-            var synA = document.createElement('a');
-            synA.href = '#';
-            synA.innerHTML = e;
-            synLi.appendChild(synA);
-            relAntList.appendChild(synLi);
-        });
-    }
+    makeList(elm, result['synonyms'], '.tr-syn-list', 'Synonyms');
+    makeList(elm, result['related'], '.tr-related-list', 'Related Words');
+    makeList(elm, result['antonyms'], '.tr-ant-list', 'Antonyms');
+    makeList(elm, result['near_ant'], '.tr-rel-ant-list', 'Near Antonyms');
 
     elm.style.display = 'block';
 }
@@ -241,6 +257,7 @@ readFile(chrome.extension.getURL("template.html"), function (_res) {
             (new Audio(this.dataset.pron)).play();
         })
     });
+
     // Change this to div.childNodes to support multiple top-level nodes
     console.log(mainElem);
     document.querySelector('body').appendChild(mainElem);

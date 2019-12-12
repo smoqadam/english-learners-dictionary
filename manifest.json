@@ -13,6 +13,7 @@
       ],
       "css":[
         "style/styles.css",
+        "style/themes.css",
         "style/fontello.css"
       ]
     }
@@ -21,8 +22,7 @@
     "activeTab",
     "contextMenus",
     "webRequest","webRequestBlocking",
-    "http://localhost/*",
-    "*://*.smoqadam.me/","*://lex-audio.useremarkable.com/*","storage"
+    "*://*.smoqadam.me/","*://*.oxfordlearnersdictionaries.com/*","storage"
   ],
   "background":{
     "scripts":[

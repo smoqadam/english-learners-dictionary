@@ -1,0 +1,156 @@
+
+#sm-dict-tr-main-template {
+    background: #fff;
+}
+
+#sm-dict-tr-main-template * {
+    color: #333333;
+}
+
+#sm-dict-tr-main-template .tr-main-container input:checked + label {
+    background: #fbfbfb;
+    border-top: 1px solid #0897ff;
+    color: #0897ff;
+}
+
+#sm-dict-tr-main-template .tr-main-container label {
+    color: #555;
+}
+
+#sm-dict-tr-main-template .tr-main-container label:hover {
+    color: #0897ff;
+}
+
+#sm-dict-tr-main-template .tr-main-container .tr-main-content-container {
+    background: #fbfbfb;
+}
+
+#sm-dict-tr-main-template .tr-main-container .tr-main-content-container .tr-tab-content {
+    color: #333;
+}
+
+#sm-dict-tr-main-template .tr-body {
+    border: 1px solid #eee;
+}
+
+#sm-dict-tr-main-template .tr-setting-btn {
+    color: #0897fd;
+}
+
+#sm-dict-tr-main-template .tr-word {
+    color: #333333;
+}
+#sm-dict-tr-main-template .tr-pron i {
+    background: #eee;
+    color: #626262;
+}
+
+#sm-dict-tr-main-template .tr-pron i:hover {
+    color: #0897ff;
+}
+#sm-dict-tr-main-template .tr-defs-list-item h6 {
+    color: #7e7e7e;
+}
+#sm-dict-tr-main-template .tr-defs-list-item h6:hover {
+    color: #4778f4;
+}
+
+#sm-dict-tr-main-template .tr-def {
+    color:#0457b0;
+}
+
+
+#sm-dict-tr-main-template .tr-main-content-container li a:hover {
+    color: #4482fd;
+    border: 1px solid #4482fd;
+}
+
+#sm-dict-tr-main-template .tr-main-content-container .sm-tr-tag {
+    border: 1px solid #eee;
+    color: #1a78fd;
+}
+#sm-dict-tr-main-template ul.tr-example-list li {
+    color: #0042a0;
+}
+
+
+
+
+
+
+
+/* 88888888888888888 DARK /*/
+
+#sm-dark-dict-tr-main-template {
+    background: #333333;
+}
+
+#sm-dark-dict-tr-main-template * {
+    color: #eeeeee;
+}
+
+#sm-dark-dict-tr-main-template .tr-main-container input:checked + label {
+    background: #3c3f41;
+    border-top: 1px solid #0897ff;
+    color: #0897ff;
+}
+
+#sm-dark-dict-tr-main-template .tr-main-container label {
+    color: #555;
+}
+
+#sm-dark-dict-tr-main-template .tr-main-container label:hover {
+    color: #0897ff;
+}
+
+#sm-dark-dict-tr-main-template .tr-main-container .tr-main-content-container {
+    background: #fbfbfb;
+}
+
+#sm-dark-dict-tr-main-template .tr-main-container .tr-main-content-container .tr-tab-content {
+    color: #333;
+}
+
+#sm-dark-dict-tr-main-template .tr-body {
+    border: 1px solid #eee;
+}
+
+#sm-dark-dict-tr-main-template .tr-setting-btn {
+    color: #0897fd;
+}
+
+#sm-dark-dict-tr-main-template .tr-word {
+    color: #333333;
+}
+#sm-dark-dict-tr-main-template .tr-pron i {
+    background: #eee;
+    color: #626262;
+}
+
+#sm-dark-dict-tr-main-template .tr-pron i:hover {
+    color: #0897ff;
+}
+#sm-dark-dict-tr-main-template .tr-defs-list-item h6 {
+    color: #7e7e7e;
+}
+#sm-dark-dict-tr-main-template .tr-defs-list-item h6:hover {
+    color: #4778f4;
+}
+
+#sm-dark-dict-tr-main-template .tr-def {
+    color:#0457b0;
+}
+
+
+#sm-dark-dict-tr-main-template .tr-main-content-container li a:hover {
+    color: #4482fd;
+    border: 1px solid #4482fd;
+}
+
+#sm-dark-dict-tr-main-template .tr-main-content-container .sm-tr-tag {
+    border: 1px solid #eee;
+    color: #1a78fd;
+}
+#sm-dark-dict-tr-main-template ul.tr-example-list li {
+    color: #0042a0;
+}
