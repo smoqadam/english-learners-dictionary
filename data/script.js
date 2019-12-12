@@ -1,60 +1,6 @@
-// Dictionary.init();
-//
-
-//
-// document.querySelector('body').addEventListener('click', function (e) {
-//   Dictionary.hideWindow();
-// });
-//
-// document.addEventListener("click", function (e) {
-//   if (e.target) {
-//     switch (e.target.className) {
-//       case "tr-search-wrapper":
-//         Dictionary.hideSearch();
-//         break;
-//       case "tr-button":
-//         e.preventDefault();
-//         Dictionary.fetchData();
-//         Dictionary.showPopup();
-//         break;
-//     }
-//   }
-// });
-// document.addEventListener('keydown', function(e){
-//     if (e.keyCode == 27) {
-//       Dictionary.hideSearch();
-//     }
-//   }, false)
-// document.addEventListener("keyup", function(e) {
-//     if (e.keyCode == 27)  {
-//         Dictionary.hideSearch();
-//     } else if (e.ctrlKey && e.shiftKey && e.keyCode == 79) {
-//         Dictionary.showSearch();
-//     } else if (e.keyCode == 13 && e.target && e.target.className == 'tr-input-search' ) {
-//         e.preventDefault();
-//         Dictionary.setWord(e.target.value);
-//         Dictionary.fetchData();
-//         Dictionary.hideSearch();
-//     }
-// });
-//
-// document.querySelector('.tr-body').addEventListener('click', function (e) {
-//   if (e.target) {
-//     switch (e.target.className) {
-//       case "tr-close":
-//         Dictionary.hideWindow();
-//         break;
-//       case "syn":
-//         e.preventDefault();
-//         Dictionary.setWord(e.target.text);
-//         Dictionary.fetchData();
-//         break;
-//     }
-//   }
-// })
 let selectedWord;
 let theme = 'dark';
-const HIDE_BTN_SECOND = 4;
+const HIDE_BTN_SECOND = 3500;
 
 document.onmouseup = function (evt) {
     let selection;
@@ -66,7 +12,11 @@ document.onmouseup = function (evt) {
             let p = r.getBoundingClientRect();
             if (p.left || p.top) {
                 selectedWord = s.toString();
-                showButton(p.top - bodyRect.top - 30, p.right);
+                chrome.storage.sync.get("dict_settings", function (res) {
+                    if (res['dict_settings']['showIcon']) {
+                        showButton(p.top - bodyRect.top - 30, p.right);
+                    }
+                });
             }
         }
     }
@@ -74,7 +24,6 @@ document.onmouseup = function (evt) {
 
 function getSetting(key, callback, errorCallback) {
     chrome.storage.sync.get('dict_settings', result => {
-        console.log({result});
         if (result['dict_settings'][key] !== undefined) {
             callback(result['dict_settings'][key]);
         } else {
@@ -93,10 +42,9 @@ chrome.runtime.onMessage.addListener(function (req) {
         hideLoading();
         hideButton();
     } else if (req.theme) {
-      switchTheme(req.theme);  
+        switchTheme(req.theme);
     } else {
-        Dictionary.showLoading();
-        Dictionary.fetchData();
+        btnClick();
     }
 });
 
@@ -169,7 +117,6 @@ function showPopup(result) {
     let elm = document.querySelector("#sm-dict-tr-main-template");
 
     elm.querySelector('a#sm-tr-setting-link').href = chrome.extension.getURL("src/setting/setting.html");
-
     // =============================================== WORD
     elm.querySelector('.tr-word').innerHTML = result.word + '<span class="sm-tr-pos">(' + result.pos + ')</span>';
     // =============================================== Pronunciation and phonetics
@@ -210,9 +157,6 @@ function showPopup(result) {
         }
         clone.querySelectorAll('h6').forEach(function (h) {
             h.id = 'closed-title';
-            // if (!next(this).querySelectorAll('li').length){
-            //     this.style.display = 'none';
-            // }
             h.addEventListener('click', toggleNext);
         });
         if (result['defs'][i]['examples'] !== undefined) {
@@ -251,7 +195,6 @@ function btnClick() {
 readFile(chrome.extension.getURL("template.html"), function (_res) {
     let mainElem = createElementFromHTML(_res);
     getSetting('theme', function(theme) {
-        console.log({theme});
         mainElem.id = 'sm-' + theme + '-tr-wrapper';
     });
     let main = mainElem.querySelector("#sm-dict-tr-main-template");
@@ -305,9 +248,9 @@ function showButton(top, left) {
     btn.style.left = left + "px";
     btn.style.display = "table-cell";
 
-    // setInterval(function () {
-    //     hideButton();
-    // }, HIDE_BTN_SECOND * 1000);
+    setTimeout(function () {
+        hideButton();
+    }, (HIDE_BTN_SECOND));
 
 }
 

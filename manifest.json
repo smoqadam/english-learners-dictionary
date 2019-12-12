@@ -3,13 +3,12 @@
   "name":"English Learner's Dictionary",
   "author":"Saeed Moghadamzadeh",
   "version":"1.0",
-  "description":"English Learner's Dictionary is here to help you to learn English words deeply with many useful information about the word such as collocations, examples, synonyms, related words, antonyms and more.",
+  "description":"English Learner's Dictionary is an open-source browser extension which helps you to lookup the word definitions, synonyms, antonyms, examples, collocations, American and British pronunciation and etc.",
 
   "content_scripts":[
     {
       "matches":["<all_urls>"],
       "js":[
-        "data/dictionary.js",
         "data/script.js"
       ],
       "css":[
@@ -38,10 +37,11 @@
     "icons/*",
     "style/*",
     "src/setting/*",
-    "template.html"
+    "template.html",
+    "settings.html"
   ],
   "options_ui":{
-    "page": "src/setting/settings.html"
+    "page": "settings.html"
   },
   "applications": {
     "gecko": {

@@ -164,6 +164,7 @@
     text-transform: capitalize;
     margin: 15px 15px;
     font-size: 30px;
+    border-bottom: none;
 }
 
 #sm-dict-tr-main-template .tr-word span.sm-tr-pos{
