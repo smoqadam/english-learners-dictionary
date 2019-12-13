@@ -24,9 +24,13 @@ browser.contextMenus.onClicked.addListener(function(info, tab) {
 });
 
 chrome.runtime.onMessage.addListener(function(req, sender, sendResponse){
-    get(req.word).then(function(ee){
-        sendResponse(ee);
-    });
+    if (req.word) {
+        get(req.word).then(function(ee){
+            sendResponse(ee);
+        });
+    } else if (req.audio) {
+        (new Audio(req.audio)).play();
+    }
     return true;
 });
 

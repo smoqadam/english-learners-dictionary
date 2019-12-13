@@ -116,7 +116,7 @@ function makeList(elm, list, selector, title) {
 function showPopup(result) {
     let elm = document.querySelector("#sm-dict-tr-main-template");
 
-    elm.querySelector('a#sm-tr-setting-link').href = chrome.extension.getURL("src/setting/setting.html");
+    elm.querySelector('a#sm-tr-setting-link').href = chrome.extension.getURL("settings.html");
     // =============================================== WORD
     elm.querySelector('.sm-tr-word').textContent = result.word;
     elm.querySelector('.sm-tr-pos').textContent = result.pos;
@@ -196,7 +196,8 @@ function btnClick() {
     });
 }
 readFile(chrome.extension.getURL("template.html"), function (_res) {
-    let mainElem = createElementFromHTML(_res);
+    let frag = document.createRange().createContextualFragment(_res);
+    var mainElem = frag.querySelector('.sm-tr-main-wrapper');
     getSetting('theme', function(theme) {
         mainElem.id = 'sm-' + theme + '-tr-wrapper';
     });
@@ -222,19 +223,14 @@ readFile(chrome.extension.getURL("template.html"), function (_res) {
 
     mainElem.querySelectorAll('.tr-pron i').forEach(function (e) {
         e.addEventListener('click', function () {
-            (new Audio(this.dataset.pron)).play();
+            chrome.runtime.sendMessage({audio: this.dataset.pron}, function(){
+            });
         })
     });
 
     document.querySelector('body').appendChild(mainElem);
 });
 
-
-function createElementFromHTML(htmlString) {
-    let div = document.createElement('div');
-        div.insertAdjacentHTML('afterbegin', htmlString.trim());
-    return div.firstChild;
-}
 
 document.querySelector('body').addEventListener('click', function (e) {
     hidePopup();
