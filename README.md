@@ -1,13 +1,14 @@
 ## Oxford Dictionary browser addon
+English Learner's Dictionary is an open-source browser extension which helps you to lookup the word definitions, synonyms, antonyms, examples, collocations, American and British pronunciation and etc.
 
-The best way to learn English is using the English to English dictionaries such as Oxford or Miriam Webster. With this extension you can check the definition of the selected word right inside the browser. 
-It using the Oxford dictionary and gives you the definition, phonetic, examples and synonyms of a word. 
+[Download for Firefox](https://addons.mozilla.org/en-US/firefox/addon/english-learners-dictionary/)
 
-[Download for Firefox](https://addons.mozilla.org/en-US/firefox/addon/oxford-dictionary-addon)
+[Download for Chrome](NOT YET)
 
-[Download for Chrome](https://chrome.google.com/webstore/detail/english-to-english-dictio/aggmgejbkkjpgapfhbigiceaeaabfnpo)
 
-![screenshot](https://user-images.githubusercontent.com/1223848/57301498-c712fc80-710b-11e9-8a92-bcad9fce1c2e.jpg)
+![dark](https://user-images.githubusercontent.com/1223848/70774403-27aa9c00-1db5-11ea-8023-fa176dcd6278.PNG)
+![light](https://user-images.githubusercontent.com/1223848/70774405-28433280-1db5-11ea-8928-22c06df88c64.PNG)
+![settings](https://user-images.githubusercontent.com/1223848/70774407-28dbc900-1db5-11ea-92d2-63882e37ffcc.PNG)
 
 
 ## Contributing
