@@ -1,4 +1,4 @@
-## Oxford Dictionary browser addon
+## English Learner's Dictionary
 English Learner's Dictionary is an open-source browser extension which helps you to lookup the word definitions, synonyms, antonyms, examples, collocations, American and British pronunciation and etc.
 
 [Download for Firefox](https://addons.mozilla.org/en-US/firefox/addon/english-learners-dictionary/)
