@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "English Learner's Dictionary",
   "author": "Saeed Moghadamzadeh",
-  "version": "1.4",
+  "version": "1.5",
   "description": "English Learner's Dictionary is an open-source browser extension which helps you to lookup the word definitions, synonyms, antonyms, examples, collocations, American and British pronunciation and etc.",
   "content_scripts": [
     {

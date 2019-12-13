@@ -2,28 +2,65 @@ let selectedWord;
 let theme = 'dark';
 const HIDE_BTN_SECOND = 3500;
 
+function getSelection(event) {
+    var elem = event.target;//.getSelectedText();
+    var l = elem.selectionEnd - elem.selectionStart;
+    var selection = elem.value.substr(elem.selectionStart, l);
+    console.log({
+        elem, selection
+    })
+    return selection;
+}
+
+
+//
+// document.onmouseup = function (event) {
+//     try {
+//         let selection = getSelection(event),
+//             bodyRect = document.body.getBoundingClientRect();
+//
+//         if (selection) {
+//             selectedWord = selection;
+//
+//             getSetting('showIcon', function (value) {
+//                 if (value) {
+//                     showButton(p.top - bodyRect.top - 30, p.right);
+//                 }
+//             }, function () {
+//                 showButton(p.top - bodyRect.top - 30, p.right);
+//             })
+//         }
+//     } catch
+//         (e) {
+//         console.log(e)
+//     }
+// }
+// ;
 document.onmouseup = function (evt) {
-    let selection;
-    let s = document.getSelection(),
-        bodyRect = document.body.getBoundingClientRect();
-    if (s.rangeCount > 0) {
-        r = s.getRangeAt(0);
-        if (r && s.toString()) {
-            let p = r.getBoundingClientRect();
-            if (p.left || p.top) {
-                selectedWord = s.toString();
-                // chrome.storage.sync.get("dict_settings", function (res) {
-                //     if (res['dict_settings']['showIcon']) {
-                //         showButton(p.top - bodyRect.top - 30, p.right);
-                //     }
-                // });
-                getSetting('showIcon', function (value) {
-                    if (value) {
+    if (evt.target.type === 'text' || evt.target.type === 'textarea') {
+        selectedWord = getSelection(evt);
+    } else {
+        let s = document.getSelection(),
+            bodyRect = document.body.getBoundingClientRect();
+        if (s.rangeCount > 0) {
+            r = s.getRangeAt(0);
+            if (r && s.toString()) {
+                let p = r.getBoundingClientRect();
+                if (p.left || p.top) {
+                    selectedWord = s.toString();
+                    // chrome.storage.sync.get("dict_settings", function (res) {
+                    //     if (res['dict_settings']['showIcon']) {
+                    //         showButton(p.top - bodyRect.top - 30, p.right);
+                    //     }
+                    // });
+                    getSetting('showIcon', function (value) {
+                        if (value) {
+                            showButton(p.top - bodyRect.top - 30, p.right);
+                        }
+                    }, function () {
                         showButton(p.top - bodyRect.top - 30, p.right);
-                    }
-                }, function () {
-                    showButton(p.top - bodyRect.top - 30, p.right);
-                })
+                    })
+                }
             }
         }
     }
@@ -127,7 +164,7 @@ function showPopup(result) {
     elm.querySelector('a#sm-tr-setting-link').target = '_blank';
     // =============================================== WORD
     elm.querySelector('.sm-tr-word').textContent = result.word;
-    elm.querySelector('.sm-tr-pos').textContent = '('+result.pos+')';
+    elm.querySelector('.sm-tr-pos').textContent = '(' + result.pos + ')';
 
 
     // =============================================== Pronunciation and phonetics
@@ -203,10 +240,11 @@ function btnClick() {
         hideLoading();
     });
 }
+
 readFile(chrome.extension.getURL("template.html"), function (_res) {
     let frag = document.createRange().createContextualFragment(_res);
     var mainElem = frag.querySelector('.sm-tr-main-wrapper');
-    getSetting('theme', function(theme) {
+    getSetting('theme', function (theme) {
         mainElem.id = 'sm-' + theme + '-tr-wrapper';
     }, function () {
         mainElem.id = 'sm-dark-tr-wrapper';
@@ -233,7 +271,7 @@ readFile(chrome.extension.getURL("template.html"), function (_res) {
 
     mainElem.querySelectorAll('.tr-pron i').forEach(function (e) {
         e.addEventListener('click', function () {
-            chrome.runtime.sendMessage({audio: this.dataset.pron}, function(){
+            chrome.runtime.sendMessage({audio: this.dataset.pron}, function () {
             });
         })
     });
