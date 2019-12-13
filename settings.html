@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>English Learner's Dictionary :: Settings</title>
+    <style>
+        #saveForm {
+            padding: 10px 20px;
+            background: #4778f4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #saveForm:hover {
+            background: #3c3f41;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .switch-field {
+            display: flex;
+            margin-bottom: 36px;
+            overflow: hidden;
+        }
+
+        .switch-field input {
+            position: absolute !important;
+            clip: rect(0, 0, 0, 0);
+            height: 1px;
+            width: 1px;
+            border: 0;
+            overflow: hidden;
+        }
+
+        .switch-field label {
+            background-color: #e4e4e4;
+            color: rgba(0, 0, 0, 0.6);
+            font-size: 14px;
+            line-height: 1;
+            text-align: center;
+            padding: 8px 16px;
+            margin-right: -1px;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+            transition: all 0.1s ease-in-out;
+        }
+
+        .switch-field label:hover {
+            cursor: pointer;
+        }
+
+        .switch-field input:checked + label {
+            background-color: #a5dc86;
+            box-shadow: none;
+        }
+
+        .switch-field label:first-of-type {
+            border-radius: 4px 0 0 4px;
+        }
+
+        .switch-field label:last-of-type {
+            border-radius: 0 4px 4px 0;
+        }
+
+        .form {
+            max-width: 600px;
+            font-family: "Arial", Tahoma, Verdana, sans-serif;
+            font-weight: normal;
+            line-height: 1.625;
+            margin: 8px auto;
+            padding: 16px;
+            box-shadow: 0px 0px 13px -1px rgba(105, 105, 105, 1);
+
+        }
+
+        h2 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        small {
+            font-size: 13px;
+            color: #7b7b7b;
+            margin-bottom: 8px;
+        }
+
+        #msg {
+            display: inline;
+            color: green;
+            transition: 0.25s ease;
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+<form action="" class="form">
+    <h1>English Learner's Dictionary</h1>
+    <small>
+        English Learner's Dictionary is an open-source browser extension which helps you to lookup the word definitions,
+        synonyms, collocations, pronunciation and etc.
+        If you like the project you can help me to improve it by <a
+            href="https://github.com/smoqadam/oxford-dictionary-browser-addon">coding contribution, report issues, fix
+        the documentation</a>
+        or even rate us on <a href="https://addons.mozilla.org/en-US/firefox/addon/oxford-dictionary-addon">Firefox</a>
+        or
+        <a href="https://chrome.google.com/webstore/detail/english-to-english-dictio/aggmgejbkkjpgapfhbigiceaeaabfnpo">Chrome</a>
+        web store.
+    </small>
+    <h2>Show the icon on top of selected text</h2>
+
+
+    <div class="switch-field">
+        <input id="show-icon-yes" name="showIcon" type="radio" value="1"/>
+        <label for="show-icon-yes">Yes</label>
+        <input id="show-icon-no" name="showIcon" type="radio" value="0"/>
+        <label for="show-icon-no">No</label>
+    </div>
+
+    <h2>Theme</h2>
+    <small>Will apply to new tabs</small>
+    <div class="switch-field">
+        <input id="theme-dark" name="theme" type="radio" value="dark"/>
+        <label for="theme-dark">Dark</label>
+        <input id="theme-light" name="theme" type="radio" value="light"/>
+        <label for="theme-light">Light</label>
+    </div>
+
+    <!--        <h2>Save words</h2>-->
+    <!--        <small>By saving words on your machine it would faster to fetch it in next time and also you can export your list</small>-->
+    <!--        <div class="switch-field">-->
+    <!--            <input type="radio" id="save-yes" name="saveWord" value="1" />-->
+    <!--            <label for="save-yes">Yes</label>-->
+    <!--            <input type="radio" id="save-no" name="saveWord" value="0"  />-->
+    <!--            <label for="save-no">No</label>-->
+    <!--        </div>-->
+    <button id="saveForm" type="submit">Save</button>
+    <div id="msg">
+        saved
+    </div>
+</form>
+<script src="setting.js"></script>
+<script src="setting.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,176 @@
+
+#sm-light-tr-wrapper #sm-dict-tr-main-template {
+    background: #fff;
+}
+
+#sm-light-tr-wrapper #sm-dict-tr-main-template * {
+    color: #333333;
+}
+
+#sm-light-tr-wrapper #sm-dict-tr-main-template .tr-main-container input:checked + label {
+    background: #fbfbfb;
+    border-top: 1px solid #0897ff;
+    color: #0897ff;
+}
+
+#sm-light-tr-wrapper #sm-dict-tr-main-template .tr-main-container a#sm-tr-setting-link {
+    color: #89b1fd;
+}
+#sm-light-tr-wrapper #sm-dict-tr-main-template .tr-main-container a#sm-tr-setting-link:hover {
+    color: #555;
+}
+
+#sm-light-tr-wrapper #sm-dict-tr-main-template .tr-main-container label {
+    color: #555;
+}
+
+#sm-light-tr-wrapper #sm-dict-tr-main-template .tr-main-container label:hover {
+    color: #0897ff;
+}
+
+#sm-light-tr-wrapper #sm-dict-tr-main-template .tr-main-container .tr-main-content-container {
+    background: #fbfbfb;
+}
+
+#sm-light-tr-wrapper #sm-dict-tr-main-template .tr-main-container .tr-main-content-container .tr-tab-content {
+    color: #333;
+}
+
+#sm-light-tr-wrapper #sm-dict-tr-main-template .tr-body {
+    border: 1px solid #eee;
+}
+
+#sm-light-tr-wrapper #sm-dict-tr-main-template .tr-setting-btn {
+    color: #0897fd;
+}
+
+#sm-light-tr-wrapper #sm-dict-tr-main-template .tr-word {
+    color: #333333;
+}
+
+.sm-light-tr-wrapper #sm-dict-tr-main-template .tr-word span.sm-tr-pos{
+    color: #333333;
+}
+
+#sm-light-tr-wrapper #sm-dict-tr-main-template .tr-pron i {
+    background: #eee;
+    color: #626262;
+}
+
+#sm-light-tr-wrapper #sm-dict-tr-main-template .tr-pron i:hover {
+    color: #0897ff;
+}
+#sm-light-tr-wrapper #sm-dict-tr-main-template .tr-defs-list-item h6 {
+    color: #7e7e7e;
+}
+#sm-light-tr-wrapper #sm-dict-tr-main-template .tr-defs-list-item h6:hover {
+    color: #4778f4;
+}
+
+#sm-light-tr-wrapper #sm-dict-tr-main-template .tr-def {
+    color:#0457b0;
+}
+
+
+#sm-light-tr-wrapper #sm-dict-tr-main-template .tr-main-content-container li a:hover {
+    color: #4482fd;
+    border: 1px solid #4482fd;
+}
+
+#sm-light-tr-wrapper #sm-dict-tr-main-template .tr-main-content-container .sm-tr-tag {
+    border: 1px solid #eee;
+    color: #1a78fd;
+}
+#sm-light-tr-wrapper #sm-dict-tr-main-template ul.tr-example-list li {
+    color: #0042a0;
+}
+
+
+
+
+
+
+
+/* 88888888888888888 DARK /*/
+
+#sm-dark-tr-wrapper #sm-dict-tr-main-template {
+    background: #333333;
+}
+
+#sm-dark-tr-wrapper #sm-dict-tr-main-template * {
+    color: #eeeeee;
+}
+
+#sm-dark-tr-wrapper #sm-dict-tr-main-template .tr-main-container input:checked + label {
+    background: #3c3f41;
+    border-top: 1px solid #54b7ff;
+    color: #54b7ff;
+}
+
+#sm-dark-tr-wrapper #sm-dict-tr-main-template .tr-main-container label {
+    color: #c1c1c1;
+}
+
+#sm-dark-tr-wrapper #sm-dict-tr-main-template .tr-main-container label:hover {
+    color: #0897ff;
+}
+
+#sm-dark-tr-wrapper #sm-dict-tr-main-template .tr-main-container .tr-main-content-container {
+    background: #3c3f41;
+}
+
+#sm-dark-tr-wrapper #sm-dict-tr-main-template .tr-main-container .tr-main-content-container .tr-tab-content {
+    color: #333;
+}
+
+#sm-dark-tr-wrapper #sm-dict-tr-main-template .tr-body {
+    border: 1px solid #eee;
+}
+
+#sm-dark-tr-wrapper #sm-dict-tr-main-template .tr-setting-btn {
+    color: #0897fd;
+}
+
+#sm-dark-tr-wrapper #sm-dict-tr-main-template .tr-word {
+    color: #b9b9b9;
+}
+
+.sm-dark-tr-wrapper #sm-dict-tr-main-template .tr-word span.sm-tr-pos{
+    color: #b9b9b9 !important;
+}
+
+#sm-dark-tr-wrapper #sm-dict-tr-main-template .tr-word {
+    color: #b9b9b9;
+}
+#sm-dark-tr-wrapper #sm-dict-tr-main-template .tr-pron i {
+    background: #3c3f41;
+    color:#cae3e3;
+}
+
+#sm-dark-tr-wrapper #sm-dict-tr-main-template .tr-pron i:hover {
+    color: #0897ff;
+}
+#sm-dark-tr-wrapper #sm-dict-tr-main-template .tr-defs-list-item h6 {
+    color: #b3b3b3;
+}
+#sm-dark-tr-wrapper #sm-dict-tr-main-template .tr-defs-list-item h6:hover {
+    color: #99b6ff;
+}
+
+#sm-dark-tr-wrapper #sm-dict-tr-main-template .tr-def {
+    color:#e3e3e3;
+}
+
+
+#sm-dark-tr-wrapper #sm-dict-tr-main-template .tr-main-content-container li a:hover {
+    color: #4482fd;
+    border: 1px solid #4482fd;
+}
+
+#sm-dark-tr-wrapper #sm-dict-tr-main-template .tr-main-content-container .sm-tr-tag {
+    border: 1px solid #606060;
+    color:#b0d1ff;
+}
+#sm-dark-tr-wrapper #sm-dict-tr-main-template ul.tr-example-list li {
+    color: #c1c1c1;
+}

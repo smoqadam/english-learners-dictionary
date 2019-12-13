@@ -24,14 +24,19 @@ browser.contextMenus.onClicked.addListener(function(info, tab) {
 });
 
 chrome.runtime.onMessage.addListener(function(req, sender, sendResponse){
-    get(req.word).then(function(ee){
-        sendResponse(ee);
-    });
+    if (req.word) {
+        get(req.word).then(function(ee){
+            sendResponse(ee);
+        });
+    } else if (req.audio) {
+        (new Audio(req.audio)).play();
+    }
     return true;
 });
 
 var get = function(word) {
-  return fetch("https://dict.smoqadam.me/?define=" + word).then(
+    var url = ("https://w.smoqadam.me/get/" + word).trim().toLowerCase();
+  return fetch(url).then(
     response => {
       if (response.status === 200) {
         return response.json();
@@ -41,7 +46,10 @@ var get = function(word) {
     }
   )
   .then(json => {
-      return json[0];
+      if (json['pron'] == undefined) {
+          throw new Error("Something went wrong on api server!");
+      }
+      return json;
   })
   .catch(err => {
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
