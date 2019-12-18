@@ -3,7 +3,7 @@ English Learner's Dictionary is an open-source browser extension which helps you
 
 [Download for Firefox](https://addons.mozilla.org/en-US/firefox/addon/english-learners-dictionary/)
 
-[Download for Chrome](NOT YET)
+[Download for Chrome](https://chrome.google.com/webstore/detail/english-learners-dictiona/aggmgejbkkjpgapfhbigiceaeaabfnpo)
 
 
 ![dark](https://user-images.githubusercontent.com/1223848/70774403-27aa9c00-1db5-11ea-8023-fa176dcd6278.PNG)
