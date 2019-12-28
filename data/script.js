@@ -13,29 +13,6 @@ function getSelection(event) {
 }
 
 
-//
-// document.onmouseup = function (event) {
-//     try {
-//         let selection = getSelection(event),
-//             bodyRect = document.body.getBoundingClientRect();
-//
-//         if (selection) {
-//             selectedWord = selection;
-//
-//             getSetting('showIcon', function (value) {
-//                 if (value) {
-//                     showButton(p.top - bodyRect.top - 30, p.right);
-//                 }
-//             }, function () {
-//                 showButton(p.top - bodyRect.top - 30, p.right);
-//             })
-//         }
-//     } catch
-//         (e) {
-//         console.log(e)
-//     }
-// }
-// ;
 document.onmouseup = function (evt) {
     if (evt.target.type === 'text' || evt.target.type === 'textarea') {
         selectedWord = getSelection(evt);
@@ -68,7 +45,7 @@ document.onmouseup = function (evt) {
 
 function getSetting(key, callback, errorCallback) {
     chrome.storage.sync.get('dict_settings', result => {
-        if (result['dict_settings'][key] !== undefined) {
+        if (result['dict_settings'] !== undefined && result['dict_settings'][key] !== undefined) {
             callback(result['dict_settings'][key]);
         } else {
             errorCallback(result['dict_settings']);
